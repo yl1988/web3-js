@@ -30,11 +30,18 @@ function MyApp({ Component, pageProps }: AppProps) {
                       <div className="flex-1">
                           <Component {...pageProps} />
                       </div>
-                      <footer className={"flex py-4 border-t-1 border-gray-200 justify-center items-center"}>
+                      <footer className={"flex py-4 border-t-1 border-gray-200 text-gray-100 justify-center items-center"}>
                           <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
                               Made with ❤️ by your frens at 🌈
                           </a>
                       </footer>
+                      {/*扫描线背景层 */}
+                      <div className="absolute inset-0 z-10000 pointer-events-none">
+                          {/* 扫描线动画 */}
+                          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyber-neon-400/10 to-transparent animate-scan-line h-px" />
+                          {/* 网格背景 */}
+                          <div className="absolute inset-0 opacity-5 grid-background" />
+                      </div>
                   </div>
               </RainbowKitProvider>
           </QueryClientProvider>

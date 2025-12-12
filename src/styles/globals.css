@@ -1,4 +1,7 @@
+/* app/globals.css */
 @import "tailwindcss";
+@import "./tailwind/tailwind-define.css";
+@import "./tailwind/tailwind-custom-style.css";
 
 html,
 body {

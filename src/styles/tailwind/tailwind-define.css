@@ -1,0 +1,169 @@
+/* app/tailwind-define.css 或直接放在 app/globals.css */
+
+
+/* 赛博朋克主题配置 */
+@theme inline {
+    /* ==== 赛博朋克配色系统 ==== */
+
+    /* 霓虹绿色系 */
+    --color-cyber-neon-50: #e6fff5;
+    --color-cyber-neon-100: #ccffeb;
+    --color-cyber-neon-200: #99ffd6;
+    --color-cyber-neon-300: #66ffc2;
+    --color-cyber-neon-400: #00ff9d; /* 主霓虹绿 */
+    --color-cyber-neon-500: #00e68a;
+    --color-cyber-neon-600: #00cc77;
+    --color-cyber-neon-700: #00b364;
+    --color-cyber-neon-800: #009951;
+    --color-cyber-neon-900: #008040;
+
+    /* 霓虹粉系 */
+    --color-cyber-pink-50: #ffe6ff;
+    --color-cyber-pink-100: #ffccff;
+    --color-cyber-pink-200: #ff99ff;
+    --color-cyber-pink-300: #ff66ff;
+    --color-cyber-pink-400: #ff00ff; /* 主霓虹粉 */
+    --color-cyber-pink-500: #e600e6;
+    --color-cyber-pink-600: #cc00cc;
+    --color-cyber-pink-700: #b300b3;
+    --color-cyber-pink-800: #990099;
+    --color-cyber-pink-900: #800080;
+
+    /* 霓虹蓝系 */
+    --color-cyber-blue-50: #e6ffff;
+    --color-cyber-blue-100: #ccffff;
+    --color-cyber-blue-200: #99ffff;
+    --color-cyber-blue-300: #66ffff;
+    --color-cyber-blue-400: #00e0ff; /* 主霓虹蓝 */
+    --color-cyber-blue-500: #00c7e6;
+    --color-cyber-blue-600: #00aecc;
+    --color-cyber-blue-700: #0095b3;
+    --color-cyber-blue-800: #007c99;
+    --color-cyber-blue-900: #006380;
+
+    /* 霓虹紫系 */
+    --color-cyber-purple-50: #f2e6ff;
+    --color-cyber-purple-100: #e6ccff;
+    --color-cyber-purple-200: #cc99ff;
+    --color-cyber-purple-300: #b366ff;
+    --color-cyber-purple-400: #9d00ff; /* 主霓虹紫 */
+    --color-cyber-purple-500: #8c00e6;
+    --color-cyber-purple-600: #7b00cc;
+    --color-cyber-purple-700: #6a00b3;
+    --color-cyber-purple-800: #590099;
+    --color-cyber-purple-900: #480080;
+
+    /* 深色背景系 */
+    --color-cyber-dark-50: #1a1a1f;
+    --color-cyber-dark-100: #16161a;
+    --color-cyber-dark-200: #121215;
+    --color-cyber-dark-300: #0e0e10;
+    --color-cyber-dark-400: #0a0a0f; /* 主深色 */
+    --color-cyber-dark-500: #08080c;
+    --color-cyber-dark-600: #060609;
+    --color-cyber-dark-700: #040406;
+    --color-cyber-dark-800: #020203;
+    --color-cyber-dark-900: #000000;
+
+    /* 辅助色系 */
+    --color-cyber-cyan-400: #00ffcc;
+    --color-cyber-cyan-500: #00e6b8;
+    --color-cyber-danger-400: #ff3366;
+    --color-cyber-danger-500: #ff0044;
+
+    /* 简化颜色名 */
+    --color-neon-400: #00ff9d;
+    --color-neon-500: #00e68a;
+    --color-neonpink: #ff00ff;
+    --color-neonblue: #00e0ff;
+    --color-neonpurple: #9d00ff;
+
+    /* ==== 渐变背景 ==== */
+    --background-image-cyber-gradient: linear-gradient(135deg, #00ff9d 0%, #9d00ff 50%, #ff00ff 100%);
+    --background-image-neon-gradient: linear-gradient(90deg, #00ff9d 0%, #00e0ff 50%, #ff00ff 100%);
+    --background-image-dark-gradient: linear-gradient(180deg, #0a0a0f 0%, #000000 100%);
+    --background-image-card-gradient: linear-gradient(145deg, rgba(10, 10, 15, 0.8) 0%, rgba(157, 0, 255, 0.1) 100%);
+
+    /* ==== 动画定义 ==== */
+    --animate-neon-pulse: neon-pulse 2s ease-in-out infinite;
+    --animate-neon-flicker: neon-flicker 1.5s ease-in-out infinite;
+    --animate-glow: glow 2s ease-in-out infinite;
+    --animate-scan-line: scan-line 10s linear infinite;
+
+    /* ==== 阴影效果 ==== */
+    --shadow-neon: 0 0 15px rgba(0, 255, 157, 0.7);
+    --shadow-neon-lg: 0 0 30px rgba(0, 255, 157, 0.9);
+    --shadow-neon-pink: 0 0 15px rgba(255, 0, 255, 0.7);
+    --shadow-neon-blue: 0 0 15px rgba(0, 224, 255, 0.7);
+    --shadow-neon-purple: 0 0 15px rgba(157, 0, 255, 0.7);
+    --shadow-inner-neon: inset 0 0 20px rgba(0, 255, 157, 0.3);
+
+    /* ==== 边框颜色 ==== */
+    --border-color-neon: rgba(0, 255, 157, 0.3);
+    --border-color-neon-pink: rgba(255, 0, 255, 0.3);
+    --border-color-neon-blue: rgba(0, 224, 255, 0.3);
+}
+
+/* ==== 关键帧动画定义 ==== */
+@keyframes neon-pulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 10px rgba(0, 255, 157, 0.7);
+    }
+    50% {
+        opacity: 0.7;
+        box-shadow: 0 0 25px rgba(0, 255, 157, 0.9), 0 0 50px rgba(0, 255, 157, 0.4);
+    }
+}
+
+@keyframes neon-flicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    60% {
+        opacity: 0.9;
+    }
+    70% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(0, 224, 255, 0.5), 0 0 10px rgba(0, 224, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 224, 255, 0.8), 0 0 40px rgba(0, 224, 255, 0.4);
+    }
+}
+
+@keyframes scan-line {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* ==== 自定义工具类 - 修正版本 ==== */
+@utility neon-text {
+    text-shadow:
+            0 0 5px currentColor,
+            0 0 10px currentColor;
+}
+
+@utility cyber-border {
+    border: 1px solid;
+    border-image: linear-gradient(90deg, #00ff9d, #9d00ff) 1;
+}
+
+@utility grid-background {
+    background-image:
+            linear-gradient(rgba(0, 255, 157, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 157, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+}

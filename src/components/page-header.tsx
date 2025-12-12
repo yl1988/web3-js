@@ -22,13 +22,13 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
       <span className="relative z-10">{children}</span>
       {/* 渐变文字效果 */}
       <span
-        className={`absolute inset-0 flex items-center justify-center bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${isActive ? 'opacity-100' : ''}`}
+        className={`absolute inset-0 flex items-center justify-center bg-gradient-to-r from-cyber-purple-400 to-cyber-blue-400 bg-clip-text text-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${isActive ? 'opacity-100' : ''}`}
       >
         {children}
       </span>
       {/* 下划线动画效果 */}
       <span
-        className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-violet-400 to-fuchsia-400 transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}
+        className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-cyber-blue-400 to-cyber-purple-400 transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}
       />
     </Link>
   );

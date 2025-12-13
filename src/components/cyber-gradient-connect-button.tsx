@@ -24,7 +24,7 @@ export default function CyberGradientConnectButton() {
                 {!connected ? (
                     <button
                         onClick={openConnectModal}
-                        className="group relative px-2 md:px-4 py-1 md:py-2 rounded-xl font-bold transition-all duration-300 overflow-hidden cursor-pointer"
+                        className="group relative px-2 md:px-4 h-8 md:h-11 rounded-xl font-bold transition-all duration-300 overflow-hidden cursor-pointer"
                         style={{
                           // 渐变边框
                           background: `
@@ -54,7 +54,8 @@ export default function CyberGradientConnectButton() {
 
                       <span className="relative z-10 flex items-center gap-3">
                           <IconConnect className="w-5 h-5" color="currentColor"/>
-                  Connect Wallet
+                          <span className="text-sm md:text-base">Connect Wallet</span>
+
                 </span>
                     </button>
                 ) : (
@@ -62,7 +63,7 @@ export default function CyberGradientConnectButton() {
                       {/* 网络按钮 - 蓝色渐变 */}
                       <button
                           onClick={openChainModal}
-                          className="group relative px-2 md:px-4 py-1 md:py-2 rounded-lg font-medium transition-all duration-300 overflow-hidden cursor-pointer"
+                          className="group relative px-2 md:px-4 h-8 md:h-11 rounded-lg font-medium transition-all duration-300 overflow-hidden cursor-pointer"
                           style={{
                             background: `
                       linear-gradient(#0a0a0f, #0a0a0f) padding-box,
@@ -80,16 +81,16 @@ export default function CyberGradientConnectButton() {
                         />
                         <span className="relative z-10 flex items-center gap-2">
                     {chain.hasIcon && chain.iconUrl && (
-                        <img alt={chain.name} src={chain.iconUrl} className="w-5 h-5" />
+                        <img alt={chain.name} src={chain.iconUrl} className="w-3 md:w-5 h-3 md:h-5" />
                     )}
-                          {chain.name}
+                          <span className="text-xs md:text-sm">{chain.name}</span>
                   </span>
                       </button>
 
                       {/* 账户按钮 - 霓虹渐变 */}
                       <button
                           onClick={openAccountModal}
-                          className="group relative px-2 md:px-6 py-1 md:py-3 rounded-lg font-bold transition-all duration-300 overflow-hidden cursor-pointer"
+                          className="group relative px-2 md:px-6 h-8 md:h-11 rounded-lg font-bold transition-all duration-300 overflow-hidden cursor-pointer"
                           style={{
                             background: `
                       linear-gradient(#0a0a0f, #0a0a0f) padding-box,
@@ -108,11 +109,11 @@ export default function CyberGradientConnectButton() {
 
                         <span className="relative z-10 flex items-center gap-3">
                     {account.displayBalance && (
-                        <span className="text-sm font-normal opacity-90">
+                        <span className="text-xs md:text-sm font-normal opacity-90">
                         {account.displayBalance}
                       </span>
                     )}
-                          <span className="font-mono">
+                          <span className="font-mono text-xs md:text-base">
                       {account.displayName}
                     </span>
                           {account.ensAvatar && (

@@ -1,7 +1,6 @@
 import NavLinkPc from "./nav-link-pc";
 
 export default function NavPc() {
-
     return <nav className="hidden lg:flex items-center gap-1">
         <NavLinkPc href="/">
           <span className="flex items-center gap-2">

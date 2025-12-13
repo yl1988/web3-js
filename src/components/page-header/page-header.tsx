@@ -1,8 +1,9 @@
 "use client"
 
 import CyberGradientConnectButton from "../cyber-gradient-connect-button";
-import NavPc from "./nav-pc";
+import NavPc from "./pc/nav-pc";
 import IconLogo from "../icons/icon-logo";
+import NavMobile from "./mobile/nav-mobile";
 /**
  * 应用程序头部导航组件
  */
@@ -18,12 +19,16 @@ export default function PageHeader() {
                             W3Wallet
                         </div>
                     </div>
+                    {/* PC 端导航 */}
                     <NavPc/>
+
                 </div>
-                {/* RainbowKit 连接按钮容器 */}
-                <div className="relative">
-                    <div className="relative z-10">
-                        <CyberGradientConnectButton />
+                <div className="relative flex justify-center items-center z-10">
+                    {/* RainbowKit 连接按钮容器 */}
+                    <CyberGradientConnectButton />
+                    {/* 移动端导航 */}
+                    <div className="ml-4">
+                        <NavMobile/>
                     </div>
                 </div>
             </div>

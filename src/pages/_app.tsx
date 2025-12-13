@@ -9,10 +9,7 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { config } from '../wagmi';
 import Head from "next/head";
 import PageHeader from "../components/page-header";
-import GlobalScan from "../components/page-halo-animation";
 import CyberBackground from "../components/cyber-background";
-import CyberAnimations from "../components/cyber-animations";
-import CenterGuang from "../components/center-guang";
 
 const client = new QueryClient();
 
@@ -31,9 +28,6 @@ function MyApp({ Component, pageProps }: AppProps) {
               <RainbowKitProvider>
                   <div className="p-x-2 flex flex-col min-h-screen">
                       <CyberBackground/>
-                      <div className={"fixed w-[1000px] h-[1000px] bottom-0 right-0"}>
-                          <CenterGuang/>
-                      </div>
                       <div className="relative z-10 flex-1">
                           <PageHeader/>
                           <div className="flex-1">
@@ -45,10 +39,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                               Made with ❤️ by your frens at 🌈
                           </a>
                       </footer>
-                      {/*扫描线背景层 */}
-                      {/*<GlobalScan/>*/}
-                      {/* 第3层：轻量动画（CSS） */}
-                      <CyberAnimations />
                   </div>
               </RainbowKitProvider>
           </QueryClientProvider>

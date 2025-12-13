@@ -2,6 +2,7 @@
 @import "tailwindcss";
 @import "./tailwind/tailwind-define.css";
 @import "./tailwind/tailwind-custom-style.css";
+@import "./scan-star-animation.css";
 
 html,
 body {

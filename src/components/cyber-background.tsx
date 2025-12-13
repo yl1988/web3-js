@@ -15,7 +15,7 @@ export default function CyberBackground() {
                     <stop offset="100%" stopColor="#ff00ff" />
                 </linearGradient>
 
-                {/* 扫描线渐变 */}
+                {/*/!* 扫描线渐变 *!/*/}
                 <linearGradient id="scan-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="transparent" />
                     <stop offset="10%" stopColor="rgba(0,255,157,0.1)" />
@@ -26,16 +26,6 @@ export default function CyberBackground() {
 
             {/* 网格背景 */}
             <rect width="100%" height="100%" fill="url(#cyber-grid)" />
-
-            {/* 中心光晕（用滤镜实现更好性能） */}
-            {/*<filter id="glow" x="0%" y="0%" width="100%" height="100%">*/}
-            {/*    <feGaussianBlur stdDeviation="50" result="blur" />*/}
-            {/*    <feMerge>*/}
-            {/*        <feMergeNode in="blur" />*/}
-            {/*        <feMergeNode in="SourceGraphic" />*/}
-            {/*    </feMerge>*/}
-            {/*</filter>*/}
-            {/*<circle cx="50%" cy="50%" r="400" fill="rgba(0,255,157,0.05)" filter="url(#glow)" />*/}
 
         </svg>
     );

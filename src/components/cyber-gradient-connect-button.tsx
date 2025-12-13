@@ -24,7 +24,7 @@ export default function CyberGradientConnectButton() {
                 {!connected ? (
                     <button
                         onClick={openConnectModal}
-                        className="group relative px-4 py-2 rounded-xl font-bold transition-all duration-300 overflow-hidden cursor-pointer"
+                        className="group relative px-2 md:px-4 py-1 md:py-2 rounded-xl font-bold transition-all duration-300 overflow-hidden cursor-pointer"
                         style={{
                           // 渐变边框
                           background: `
@@ -62,7 +62,7 @@ export default function CyberGradientConnectButton() {
                       {/* 网络按钮 - 蓝色渐变 */}
                       <button
                           onClick={openChainModal}
-                          className="group relative px-4 py-2 rounded-lg font-medium transition-all duration-300 overflow-hidden cursor-pointer"
+                          className="group relative px-2 md:px-4 py-1 md:py-2 rounded-lg font-medium transition-all duration-300 overflow-hidden cursor-pointer"
                           style={{
                             background: `
                       linear-gradient(#0a0a0f, #0a0a0f) padding-box,
@@ -89,7 +89,7 @@ export default function CyberGradientConnectButton() {
                       {/* 账户按钮 - 霓虹渐变 */}
                       <button
                           onClick={openAccountModal}
-                          className="group relative px-6 py-3 rounded-lg font-bold transition-all duration-300 overflow-hidden cursor-pointer"
+                          className="group relative px-2 md:px-6 py-1 md:py-3 rounded-lg font-bold transition-all duration-300 overflow-hidden cursor-pointer"
                           style={{
                             background: `
                       linear-gradient(#0a0a0f, #0a0a0f) padding-box,

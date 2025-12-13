@@ -25,6 +25,7 @@ export default function PureSVGHalo() {
             });
         };
 
+
         updateScreenSize();
         window.addEventListener('resize', updateScreenSize);
 

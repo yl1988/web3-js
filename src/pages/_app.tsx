@@ -10,6 +10,7 @@ import { config } from '../wagmi';
 import Head from "next/head";
 import PageHeader from "../components/page-header";
 import PageBackground from "../components/page-background";
+import {cyberpunkTheme} from "../../rainbowkit-theme";
 
 const client = new QueryClient();
 
@@ -25,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <WagmiProvider config={config}>
           <QueryClientProvider client={client}>
-              <RainbowKitProvider>
+              <RainbowKitProvider theme={cyberpunkTheme}>
                   <div className="p-x-2 flex flex-col min-h-screen">
                       <PageBackground/>
                       <div className="z-10 flex-1 flex flex-col">

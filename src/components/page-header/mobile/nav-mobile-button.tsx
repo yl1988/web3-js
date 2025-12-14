@@ -1,7 +1,7 @@
 "use client"
 
 import {useEffect, useState} from "react";
-import MenuLine from "./menu-line";
+import NavButtonLine from "./nav-button-line";
 
 export default function NavMobileButton() {
 
@@ -57,12 +57,12 @@ export default function NavMobileButton() {
                  }}
             />
             <div className="flex flex-col justify-around w-full h-full">
-                <MenuLine className={`${menuIsOpen ? 'opacity-0' : 'opacity-100'}`}/>
+                <NavButtonLine className={`${menuIsOpen ? 'opacity-0' : 'opacity-100'}`}/>
                 <span className="relative h-0.5">
-                    <MenuLine className={`absolute left-0 top-0 ${menuIsOpen ? 'rotate-45' : ''}`}/>
-                    <MenuLine className={`absolute left-0 top-0 ${menuIsOpen ? '-rotate-45' : ''}`}/>
+                    <NavButtonLine className={`absolute left-0 top-0 ${menuIsOpen ? 'rotate-45' : ''}`}/>
+                    <NavButtonLine className={`absolute left-0 top-0 ${menuIsOpen ? '-rotate-45' : ''}`}/>
                 </span>
-                <MenuLine className={`${menuIsOpen ? 'opacity-0' : 'opacity-100'}`}/>
+                <NavButtonLine className={`${menuIsOpen ? 'opacity-0' : 'opacity-100'}`}/>
             </div>
         </button>
     </div>

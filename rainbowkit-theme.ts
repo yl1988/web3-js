@@ -7,18 +7,18 @@ export const cyberpunkTheme: Theme = {
     // 覆盖所有颜色
     colors: {
         // 连接按钮
-        accentColor: '#00ff9d',
+        accentColor: '#99ffff',
         accentColorForeground: '#0a0a0f',
         connectButtonBackground: '#0a0a0f',
         connectButtonBackgroundError: '#ff3366',
         connectButtonInnerBackground: '#121215',
-        connectButtonText: '#00ff9d',
+        connectButtonText: '#cc99ff',
         connectButtonTextError: '#ffffff',
 
         // 模态框
         modalBackground: '#0a0a0f',
         modalBackdrop: 'rgba(10, 10, 15, 0.9)',
-        modalBorder: 'rgba(0, 255, 157, 0.3)',
+        modalBorder: 'rgba(153, 255, 255, 0.3)',
         modalText: '#ffffff',
         modalTextDim: '#888888',
         modalTextSecondary: '#cccccc',
@@ -54,7 +54,7 @@ export const cyberpunkTheme: Theme = {
         generalBorderDim: 'rgba(0, 255, 157, 0.1)',
         error: '#ff3366',
 
-        connectionIndicator: "#00ff9d", // 连接时显示绿色
+        connectionIndicator: "#cc99ff", // 连接时显示绿色
         downloadBottomCardBackground: "#121215", // 下载卡片底部背景
         downloadTopCardBackground: "#0a0a0f", // 下载卡片顶部背景
     },
@@ -62,7 +62,7 @@ export const cyberpunkTheme: Theme = {
     // 阴影
     shadows: {
         connectButton: '0 0 15px rgba(0, 255, 157, 0.4)',
-        dialog: '0 0 30px rgba(0, 255, 157, 0.3)',
+        dialog: '0 0 30px rgba(153, 255, 255, 0.3)',
         profileDetailsAction: '0 0 10px rgba(0, 255, 157, 0.3)',
         selectedOption: '0 0 10px rgba(0, 255, 157, 0.4)',
         selectedWallet: '0 0 20px rgba(0, 255, 157, 0.4)',

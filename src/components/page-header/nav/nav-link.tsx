@@ -1,7 +1,8 @@
 import {usePathname} from "next/navigation";
 import Link from "next/link";
+import React from "react";
 
-export default function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+export default function NavLink({ href, children, onClick }: { href: string; children: React.ReactNode;onClick?: React.MouseEventHandler<HTMLAnchorElement>; }) {
 
     const pathname = usePathname();
     const isActive = pathname === href;
@@ -10,6 +11,7 @@ export default function NavLink({ href, children }: { href: string; children: Re
         <Link
             href={href}
             className={`relative px-4 py-3 font-medium rounded-lg transition-all duration-300 group overflow-hidden flex-shrink-0`}
+            onClick={onClick}
         >
             {/* 基础文字 - 始终可见的白色/灰色 */}
             <span className={`relative z-10 ${isActive ? 'text-cyber-neon-400' : 'text-gray-300 hover:text-white'}`}>

@@ -3,7 +3,7 @@
 import {useEffect, useState} from "react";
 import NavButtonLine from "./nav-button-line";
 
-export default function NavMobileButton({change} : {change: (isOpen: boolean) => void}) {
+export default function NavMobileMenuButton({change} : {change: (isOpen: boolean) => void}) {
 
     const [isClient, setIsClient] = useState(false);
     const [menuIsOpen, setMenuIsOpen ] = useState(false) // 打开菜单
@@ -18,9 +18,8 @@ export default function NavMobileButton({change} : {change: (isOpen: boolean) =>
      * 切换打开关闭菜单
      */
     const toggleMenu = () => {
-        const nextMenuIsOpen = !menuIsOpen
-        setMenuIsOpen(nextMenuIsOpen)
-        change(nextMenuIsOpen)
+        setMenuIsOpen(!menuIsOpen)
+        change(true)
     }
 
     // 非客户端不显示
@@ -59,12 +58,9 @@ export default function NavMobileButton({change} : {change: (isOpen: boolean) =>
                  }}
             />
             <div className="flex flex-col justify-around w-full h-full">
-                <NavButtonLine className={`${menuIsOpen ? 'opacity-0' : 'opacity-100'}`}/>
-                <span className="relative h-0.5">
-                    <NavButtonLine className={`absolute left-0 top-0 ${menuIsOpen ? 'rotate-45' : ''}`}/>
-                    <NavButtonLine className={`absolute left-0 top-0 ${menuIsOpen ? '-rotate-45' : ''}`}/>
-                </span>
-                <NavButtonLine className={`${menuIsOpen ? 'opacity-0' : 'opacity-100'}`}/>
+                <NavButtonLine/>
+                <NavButtonLine/>
+                <NavButtonLine/>
             </div>
         </button>
     </div>

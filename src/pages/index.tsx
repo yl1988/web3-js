@@ -4,13 +4,50 @@ import PureSVGHalo from "../components/dashboard/pure-svg-halo";
 import CyberCard from "../components/card/cyber-card";
 import CyberGradientConnectButton from "../components/cyber-gradient-connect-button";
 import IconLogo from "../components/icons/icon-logo";
+import {useAccount} from "wagmi";
 
 const Dashboard: NextPage = () => {
+
+  const { address, isConnected, chainId } = useAccount();
 
   /**
    * 获取渲染内容布局
    */
   const getContent = () => {
+   if(isConnected && address){
+     return <div className="flex-1 w-full px-4 py-6 max-w-7xl">
+       <div className="flex mb-4  gap-4">
+         <div className="flex-1">
+           <CyberCard contentClassName="flex flex-col">
+             <p className="text-cyber-neon-400 text-xl font-bold mb-6">Your supplies</p>
+             <p className="text-cyber-blue-200 text-md">Nothing supplied yet</p>
+           </CyberCard>
+         </div>
+         <div className="flex-1">
+           <CyberCard contentClassName="flex flex-col">
+             <p className="text-cyber-neon-400 text-xl font-bold mb-6">Your borrows</p>
+             <p className="text-cyber-blue-200 text-md">Nothing supplied yet</p>
+           </CyberCard>
+         </div>
+       </div>
+       <div className="flex  gap-4">
+         <div className="flex-1">
+           <CyberCard contentClassName="flex flex-col">
+             <div className="flex justify-between">
+               <p className="text-cyber-neon-400 text-xl font-bold mb-6">Assets to supply</p>
+             </div>
+           </CyberCard>
+         </div>
+         <div className="flex-1">
+           <CyberCard contentClassName="flex flex-col">
+             <div className="flex justify-between">
+               <p className="text-cyber-neon-400 text-xl font-bold mb-6">Assets to borrow</p>
+             </div>
+           </CyberCard>
+         </div>
+       </div>
+     </div>
+   }
     return <CyberCard className="flex flex-col justify-center w-10/12 lg:w-[800px] xl:w-[1000px] 2xl:w-[1200px] 3xl:w-[1440px] h-[70vh]"
                       contentClassName="flex flex-col justify-center items-center"
     >

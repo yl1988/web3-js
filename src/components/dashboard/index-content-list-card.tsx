@@ -11,8 +11,15 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import {CyberAlert} from "@/src/components/cyber-alert/cyber-alert";
+import {CyberTable, CyberTableColumn} from "@/src/components/cyber-table/cyber-table";
 
-export default function IndexContentListCard({title}: {title: string}) {
+interface Props<T,K> {
+    title: string,
+    columns: CyberTableColumn<T>[],
+    data: K[],
+}
+
+export default function IndexContentListCard<T,K>({title, columns, data}: Props<T,K>) {
 
     const [isOpen, setIsOpen] = useState(true);
     const [value, setValue] = useState("all")
@@ -21,7 +28,7 @@ export default function IndexContentListCard({title}: {title: string}) {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex-1">
+        className="flex-1 flex-shrink-0">
         <CyberCard contentClassName="flex flex-col">
             <div className="flex justify-between">
                 <p className="text-cyber-neon-400 text-xl font-bold mb-6">{title}</p>
@@ -59,6 +66,9 @@ export default function IndexContentListCard({title}: {title: string}) {
                     description="Your Ethereum wallet is empty. Purchase or transfer assets."
                     showIcon
                 />
+                <div className="mt-2">
+                    <CyberTable columns={columns} data={data}/>
+                </div>
             </div>
         </CyberCard>
     </motion.div>

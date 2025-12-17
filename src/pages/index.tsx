@@ -5,27 +5,58 @@ import CyberCard from "../components/card/cyber-card";
 import CyberGradientConnectButton from "../components/cyber-gradient-connect-button";
 import IconLogo from "../components/icons/icon-logo";
 import {useAccount} from "wagmi";
-import { motion } from 'framer-motion';
 import IndexTopTitleCard from "@/src/components/dashboard/index-top-title-card";
 import IndexContentListCard from "@/src/components/dashboard/index-content-list-card";
+import { columns as supplyTableColumns, data as supplyTableData } from "../components/dashboard/supply-table-data"
+import { columns as borrowTableColumns, data as borrowTableData } from "../components/dashboard/borrow-table-data"
 
 const Dashboard: NextPage = () => {
 
   const { address, isConnected, chainId } = useAccount();
 
   /**
+   * 获取供应事件
+   * @param value
+   */
+  const onSuplly = (value:string) => {
+    console.log(value)
+  }
+  /**
+   * 获取供应详情
+   * @param value
+   */
+  const onSupllyDetails = (value:string) => {
+    console.log(value)
+  }
+  /**
+   * 获取借事件
+   * @param value
+   */
+  const onBorrow = (value:string) => {
+    console.log(value)
+  }
+  /**
+   * 获取借详情
+   * @param value
+   */
+  const onBorrowDetails = (value:string) => {
+    console.log(value)
+  }
+
+
+  /**
    * 获取渲染内容布局
    */
   const getContent = () => {
    if(isConnected && address){
-     return <div className="flex-1 w-full px-4 py-6 max-w-7xl">
+     return <div className="flex-1 w-full px-4 py-6 max-w-screen-2xl">
        <div className="flex mb-4  gap-4">
          <IndexTopTitleCard title={"Your supplies"}>Nothing supplied yet</IndexTopTitleCard>
          <IndexTopTitleCard title={"Your borrows"}>Nothing supplied yet</IndexTopTitleCard>
        </div>
        <div className="flex  gap-4">
-         <IndexContentListCard title={"Assets to supply"}/>
-         <IndexContentListCard title={"Assets to borrow"}/>
+         <IndexContentListCard title={"Assets to supply"} columns={ supplyTableColumns(onSuplly, onSupllyDetails)} data={supplyTableData}/>
+         <IndexContentListCard title={"Assets to borrow"} columns={ borrowTableColumns(onBorrow, onBorrowDetails)} data={borrowTableData}/>
        </div>
      </div>
    }

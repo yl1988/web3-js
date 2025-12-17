@@ -6,6 +6,8 @@ import CyberGradientConnectButton from "../components/cyber-gradient-connect-but
 import IconLogo from "../components/icons/icon-logo";
 import {useAccount} from "wagmi";
 import { motion } from 'framer-motion';
+import IndexTopTitleCard from "@/src/components/dashboard/index-top-title-card";
+import IndexContentListCard from "@/src/components/dashboard/index-content-list-card";
 
 const Dashboard: NextPage = () => {
 
@@ -18,50 +20,12 @@ const Dashboard: NextPage = () => {
    if(isConnected && address){
      return <div className="flex-1 w-full px-4 py-6 max-w-7xl">
        <div className="flex mb-4  gap-4">
-         <motion.div
-             initial={{ opacity: 0, y: -20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.5 }}
-             className="flex-1">
-           <CyberCard contentClassName="flex flex-col">
-             <p className="text-cyber-neon-400 text-xl font-bold mb-6">Your supplies</p>
-             <p className="text-cyber-blue-200 text-md">Nothing supplied yet</p>
-           </CyberCard>
-         </motion.div>
-         <motion.div
-             initial={{ opacity: 0, y: -20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.5 }}
-             className="flex-1">
-           <CyberCard contentClassName="flex flex-col">
-             <p className="text-cyber-neon-400 text-xl font-bold mb-6">Your borrows</p>
-             <p className="text-cyber-blue-200 text-md">Nothing supplied yet</p>
-           </CyberCard>
-         </motion.div>
+         <IndexTopTitleCard title={"Your supplies"}>Nothing supplied yet</IndexTopTitleCard>
+         <IndexTopTitleCard title={"Your borrows"}>Nothing supplied yet</IndexTopTitleCard>
        </div>
        <div className="flex  gap-4">
-         <motion.div
-             initial={{ opacity: 0, y: -20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.5 }}
-             className="flex-1">
-           <CyberCard contentClassName="flex flex-col">
-             <div className="flex justify-between">
-               <p className="text-cyber-neon-400 text-xl font-bold mb-6">Assets to supply</p>
-             </div>
-           </CyberCard>
-         </motion.div>
-         <motion.div
-             initial={{ opacity: 0, y: -20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.5 }}
-             className="flex-1">
-           <CyberCard contentClassName="flex flex-col">
-             <div className="flex justify-between">
-               <p className="text-cyber-neon-400 text-xl font-bold mb-6">Assets to borrow</p>
-             </div>
-           </CyberCard>
-         </motion.div>
+         <IndexContentListCard title={"Assets to supply"}/>
+         <IndexContentListCard title={"Assets to borrow"}/>
        </div>
      </div>
    }

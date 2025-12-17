@@ -136,6 +136,14 @@
             0 0 5px currentColor,
             0 0 10px currentColor,
             0 0 20px currentColor;
+
+    /* 确保有这些基础变量供 shadcn 使用 */
+    --background: var(--color-cyber-dark-400);
+    --foreground: #ffffff;
+    --primary: var(--color-cyber-neon-400);
+    --primary-foreground: #000000;
+    --muted: var(--color-cyber-dark-300);
+    --muted-foreground: #9ca3af;
 }
 
 /* ==== 关键帧动画定义 ==== */

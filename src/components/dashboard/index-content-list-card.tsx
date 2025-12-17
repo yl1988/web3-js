@@ -10,6 +10,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import {CyberAlert} from "@/src/components/cyber-alert/cyber-alert";
 
 export default function IndexContentListCard({title}: {title: string}) {
 
@@ -52,7 +53,12 @@ export default function IndexContentListCard({title}: {title: string}) {
             </div>
             {/*下面内容区*/}
             <div>
-
+                <CyberAlert
+                    type="info"
+                    size="small"
+                    description="Your Ethereum wallet is empty. Purchase or transfer assets."
+                    showIcon
+                />
             </div>
         </CyberCard>
     </motion.div>

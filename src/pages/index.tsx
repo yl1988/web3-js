@@ -9,6 +9,7 @@ import IndexTopTitleCard from "@/src/components/dashboard/index-top-title-card";
 import IndexContentListCard from "@/src/components/dashboard/index-content-list-card";
 import { columns as supplyTableColumns, data as supplyTableData } from "../components/dashboard/supply-table-data"
 import { columns as borrowTableColumns, data as borrowTableData } from "../components/dashboard/borrow-table-data"
+import {getTokenBalance} from "@/lib/get-data-from-ethers";
 
 const Dashboard: NextPage = () => {
 
@@ -20,6 +21,7 @@ const Dashboard: NextPage = () => {
    */
   const onSuplly = (value:string) => {
     console.log(value)
+    // getTokenBalance()
   }
   /**
    * 获取供应详情

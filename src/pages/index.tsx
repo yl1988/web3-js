@@ -14,7 +14,7 @@ import DashBoardNoData from "@/src/components/dashboard/dashboard-no-data";
 import DashboardLoading from "@/src/components/dashboard/dashboard-loading";
 import DashBoardNoConnected from "@/src/components/dashboard/dashboard-no-connected";
 import {DashboardSupplyAssetData} from "@/src/types/dashboard";
-import CyberButton from "@/src/components/cyber-button";
+import CyberButton from "@/src/components/ui/cyber-button";
 
 const Dashboard: NextPage = () => {
 

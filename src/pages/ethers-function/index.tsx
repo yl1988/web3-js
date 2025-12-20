@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CyberCard from '@/src/components/ui/card/cyber-card';
-import CyberButton from '@/src/components/cyber-button';
+import CyberButton from '@/src/components/ui/cyber-button';
 import PageLoading from '@/src/components/page-loading';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectLabel, SelectGroup } from '@/components/ui/select';
 import { getEthersFunctions } from '../../lib/ethers';

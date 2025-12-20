@@ -1,7 +1,7 @@
 跟组件注入
 ````tsx
 // app/layout.tsx
-import { ModalProvider } from '@/components/ui/modal';
+import { GlobalModalContainer } from '../components/ui/cyber-modal/global-modal';
 
 export default function RootLayout({
   children,
@@ -11,9 +11,8 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body>
-        <ModalProvider>
-          {children}
-        </ModalProvider>
+      {children}
+      <GlobalModalContainer />
       </body>
     </html>
   );
@@ -24,7 +23,7 @@ export default function RootLayout({
 // 或者 _app.tsx
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { ModalProvider } from "../components/ui";
+import { GlobalModalContainer } from '../components/ui/cyber-modal/global-modal';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <>
@@ -36,9 +35,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <link href="/favicon.ico" rel="icon" />
       </Head>
-      <ModalProvider>
+      <div>
           <Component {...pageProps} />
-      </ModalProvider>
+          <GlobalModalContainer />
+      </div>
   </>
 }
 
@@ -46,109 +46,65 @@ export default MyApp;
 
 ````
 
-使用hook
+全局调用
 
 ````typescript jsx
-import { useModal } from '@/components/ui/modal';
+import { useGlobalModal, GlobalModalManager } from '@/components/ui/cyber-modal/global-modal';
 
-function MyComponent() {
-  const modal = useModal();
+// 在组件内使用 Hook
+function ComponentA() {
+    const modal = useGlobalModal();
 
-  const showWalletModal = () => {
-    modal.open({
-      title: '连接钱包',
-      content: (
-        <div className="space-y-4">
-          <p>请选择要连接的钱包：</p>
-          {/* 钱包列表 */}
-        </div>
-      ),
-      size: 'sm',
-      theme: 'neon',
-      onConfirm: async () => {
-        // 确认逻辑
-      },
+    const handleClick = () => {
+        modal.open({
+            title: '全局弹窗 A',
+            content: '通过 Hook 打开',
+            theme: 'neon',
+            onConfirm: () => {
+                console.log('确认');
+                modal.closeAll();
+            }
+        });
+    };
+
+    return <button onClick={handleClick}>打开全局弹窗</button>;
+}
+
+// 在任意地方静态调用
+function someUtilityFunction() {
+    const modalId = GlobalModalManager.open({
+        title: '静态调用',
+        content: '在任何地方都可以调用',
+        theme: 'cyber',
     });
-  };
 
-  return (
-    <button onClick={showWalletModal}>打开弹窗</button>
-  );
+    // 3秒后自动关闭
+    setTimeout(() => {
+        GlobalModalManager.close(modalId);
+    }, 3000);
 }
 ````
 
-静态方法
-````typescript jsx
-import ModalManager from '@/lib/modal-manager';
-
-// 在任何函数中调用
-function showSuccessMessage() {
-  const modalId = ModalManager.open({
-    title: '操作成功',
-    content: '钱包已成功创建！',
-    theme: 'neon',
-    showConfirmButton: true,
-    showCloseButton: false,
-    confirmText: '知道了',
-    onConfirm: () => {
-      console.log('用户确认了');
-    },
-  });
-
-  // 3秒后自动关闭
-  setTimeout(() => {
-    ModalManager.close(modalId);
-  }, 3000);
-}
-
-// 或者使用更简洁的方式
-import { Modal } from '@/components/ui/modal';
-
-// 在非组件代码中
-Modal.open = ModalManager.open;
-Modal.close = ModalManager.close;
-Modal.closeAll = ModalManager.closeAll;
-Modal.update = ModalManager.update;
-
-// 然后可以直接使用
-Modal.open({
-  title: '警告',
-  content: '请不要泄露私钥！',
-  theme: 'danger',
-});
-````
 
 组件直接使用
 
 ````typescript jsx
-import { Modal } from '@/components/ui/modal';
-import { useState } from 'react';
+import { Modal } from '@/components/ui/cyber-modal';
 
 function MyComponent() {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <>
-      <button onClick={() => setIsOpen(true)}>打开弹窗</button>
-      
-      <Modal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        title="创建钱包"
-        content={
-          <div className="space-y-4">
-            <p className="text-cyber-neon-400">请保存好以下信息：</p>
-            <pre className="bg-cyber-dark-300 p-3 rounded">
-              {/* 钱包信息 */}
-            </pre>
-          </div>
-        }
-        theme="cyber"
-        glowEffect={true}
-        size="lg"
-      />
-    </>
-  );
+    return (
+        <>
+            <button onClick={() => setIsOpen(true)}>打开弹窗</button>
+            <Modal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                title="直接使用"
+                content="内容"
+            />
+        </>
+    );
 }
 ````
 

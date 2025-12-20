@@ -5,6 +5,8 @@ import PageLoading from '@/src/components/page-loading';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectLabel, SelectGroup } from '@/components/ui/select';
 import { getEthersFunctions } from '../../lib/ethers';
 import { CreateWalletInfo, EtherFunctionCardLoading } from '../../types/ethers-function';
+import Modal from '../../components/ui/cyber-modal';
+import { useGlobalModal } from '../../components/ui/cyber-modal/global-modal';
 
 const loadingDefault: EtherFunctionCardLoading = {
     connectWallet: false,
@@ -21,14 +23,42 @@ export default function EthersFunction() {
         mnemonic: '',
         walletInstance: null,
     });
-
+    const [isOpen, setIsOpen] = useState(false);
+    const modal = useGlobalModal();
     // 获取当前版本的函数
     const functionEvents = getEthersFunctions(ethersVersion);
 
     /**
+     * 判断是否安装了MetaMask
+     * 如果没有安装，弹出弹窗提示安装
+     */
+    const isMetaMaskInstalled = () => {
+
+        return new Promise(resolve => {
+            console.log('window.ethereum:', window.ethereum);
+            const hasMetaMask = window.ethereum && window.ethereum.isMetaMask;
+            console.log('hasMetaMask:', hasMetaMask);
+            if (!hasMetaMask) {
+                modal.open({
+                    title: '查账metaMask失败',
+                    content: "您还没有安装MetaMask,请安装MetaMask后重试",
+                    size: 'sm',
+                    theme: 'neon',
+                    onConfirm: async () => {
+                        // 确认逻辑
+                    },
+                });
+                return
+            }
+            resolve(true)
+        })
+
+    }
+    /**
      * 连接钱包处理
      */
     const handleConnectWallet = async () => {
+        await isMetaMaskInstalled()
         try {
             setConnectWalletAddress('');
             setCardLoading({ ...loadingDefault, connectWallet: true });
@@ -46,7 +76,8 @@ export default function EthersFunction() {
     /**
      * 创建钱包处理
      */
-    const handleCreateWallet = () => {
+    const handleCreateWallet = async () => {
+        await isMetaMaskInstalled()
         try {
             const walletInfo = functionEvents.createWallet();
             setCreateWalletInfo(walletInfo);
@@ -78,7 +109,7 @@ export default function EthersFunction() {
         });
     };
 
-    return (
+    return <>
         <div className="max-w-4xl w-full flex-1 p-4 flex flex-wrap m-auto">
             <div className="w-full flex flex-col space-y-2">
                 {/* 头部版本下拉框和重置按钮 */}
@@ -131,5 +162,21 @@ export default function EthersFunction() {
                 </div>
             </div>
         </div>
-    );
+        <Modal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            title="创建钱包"
+            content={
+                <div className="space-y-4">
+                    <p className="text-cyber-neon-400">请保存好以下信息：</p>
+                    <pre className="bg-cyber-dark-300 p-3 rounded">
+              {/* 钱包信息 */}
+            </pre>
+                </div>
+            }
+            theme="cyber"
+            glowEffect={true}
+            size="lg"
+        />
+    </>
 }

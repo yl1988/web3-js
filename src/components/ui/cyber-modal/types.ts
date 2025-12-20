@@ -36,3 +36,11 @@ export type ModalRef = {
     closeAll: () => void;
     update: (id: string, options: Partial<ModalOptions>) => void;
 };
+
+export interface ModalContextType {
+    modals: ModalInstance[];
+    openModal: (options: ModalOptions) => string;
+    closeModal: (id: string) => void;
+    closeAllModals: () => void;
+    updateModal: (id: string, options: Partial<ModalOptions>) => void;
+}

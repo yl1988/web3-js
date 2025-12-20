@@ -5,7 +5,7 @@ import {
     XCircle,
 } from "lucide-react"
 import {CyberAlertProps} from "@/src/types/cyber-alert";
-import {sizeConfig, typeConfig} from "@/src/components/cyber-alert/cyber-alert-config";
+import {sizeConfig, typeConfig} from "@/src/components/ui/cyber-alert/cyber-alert-config";
 
 // 使用示例
 // <CyberAlert

@@ -1,6 +1,6 @@
 import IconLogo from "@/src/components/icons/icon-logo";
 import CyberGradientConnectButton from "@/src/components/cyber-gradient-connect-button";
-import CyberCard from "@/src/components/card/cyber-card";
+import CyberCard from "@/src/components/ui/card/cyber-card";
 import React from "react";
 
 export default function DashBoardNoConnected() {

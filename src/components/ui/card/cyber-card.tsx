@@ -4,7 +4,7 @@
 
 
 import React, { ReactNode } from 'react'
-import { cn } from '../../utils/utils'
+import { cn } from '../../../utils/utils'
 
 interface CyberCardProps {
     children?: ReactNode

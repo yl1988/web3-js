@@ -1,4 +1,4 @@
-// src/lib/ethers/index.ts
+// src/lib/ethers/index.tsx
 import { getV5Functions } from './ethers-v5';
 import { getV6Functions } from './ethers-v6';
 import { WalletFunctions } from '../../types/ethers-function';

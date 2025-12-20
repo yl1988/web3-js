@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CyberCard from '@/src/components/card/cyber-card';
+import CyberCard from '@/src/components/ui/card/cyber-card';
 import CyberButton from '@/src/components/cyber-button';
 import PageLoading from '@/src/components/page-loading';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectLabel, SelectGroup } from '@/components/ui/select';

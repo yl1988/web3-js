@@ -1,4 +1,4 @@
-import CyberCard from "@/src/components/card/cyber-card";
+import CyberCard from "@/src/components/ui/card/cyber-card";
 import {motion} from "framer-motion";
 import {useState} from "react";
 
@@ -10,8 +10,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import {CyberAlert} from "@/src/components/cyber-alert/cyber-alert";
-import {CyberTable, CyberTableColumn} from "@/src/components/cyber-table/cyber-table";
+import {CyberAlert} from "@/src/components/ui/cyber-alert/cyber-alert";
+import {CyberTable, CyberTableColumn} from "@/src/components/ui/cyber-table/cyber-table";
 
 interface Props<T,K> {
     title: string,

@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { ModalProvider } from "../components/ui";
 
 import { config } from '../wagmi';
 import Head from "next/head";
@@ -27,18 +28,20 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WagmiProvider config={config}>
           <QueryClientProvider client={client}>
               <RainbowKitProvider theme={cyberpunkTheme}>
-                  <div className="p-x-2 flex flex-col min-h-screen">
-                      <PageBackground/>
-                      <div className="z-10 flex-1 flex flex-col">
-                          <PageHeader/>
-                          <Component {...pageProps} />
+                  <ModalProvider>
+                      <div className="p-x-2 flex flex-col min-h-screen">
+                          <PageBackground/>
+                          <div className="z-10 flex-1 flex flex-col">
+                              <PageHeader/>
+                              <Component {...pageProps} />
+                          </div>
+                          <footer className={"flex py-4 border-t-1 border-gray-200 text-gray-100 justify-center items-center"}>
+                              <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
+                                  Made with ❤️ by your frens at 🌈
+                              </a>
+                          </footer>
                       </div>
-                      <footer className={"flex py-4 border-t-1 border-gray-200 text-gray-100 justify-center items-center"}>
-                          <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
-                              Made with ❤️ by your frens at 🌈
-                          </a>
-                      </footer>
-                  </div>
+                  </ModalProvider>
               </RainbowKitProvider>
           </QueryClientProvider>
       </WagmiProvider>

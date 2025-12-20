@@ -1,4 +1,4 @@
-import {CyberTableColumn} from "@/src/components/cyber-table/cyber-table";
+import {CyberTableColumn} from "@/src/components/ui/cyber-table/cyber-table";
 import { DashboardSupplyAssetData} from "@/src/types/dashboard";
 import AssetsTableButton from "@/src/components/dashboard/assets-table-button";
 import {mainnet} from "wagmi/chains";

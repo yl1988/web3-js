@@ -4,7 +4,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ModalOptions } from './types';
-import CyberButton from '@/src/components/cyber-button';
+import CyberButton from '@/src/components/ui/cyber-button';
 
 interface ModalProps extends ModalOptions {
     isOpen: boolean;
@@ -234,7 +234,7 @@ const Modal: React.FC<ModalProps> = ({
                                 <div className="flex justify-end gap-3">
                                     {showCloseButton && (
                                         <CyberButton
-                                            variant="outline"
+                                            variant="cancel"
                                             onClick={onClose}
                                             theme={selectedTheme.buttonTheme}
                                         >

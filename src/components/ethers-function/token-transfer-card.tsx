@@ -21,7 +21,7 @@ import {ERC20_JSON_ABI} from "@/src/constants/abis/erc20-json";
 import {getEthersFunctions} from "@/src/lib/ethers";
 import { useChainId } from 'wagmi'
 import {useGlobalModal} from "@/src/components/ui/cyber-modal/global-modal";
-import { diagnoseTokenBalance } from "../../utils/test-balence"
+import {checkAccount2Address, checkInternalTransactions, diagnoseTokenBalance} from "../../utils/test-balence"
 
 interface TokenTransferCardProps {
     ethersVersion: '5' | '6'
@@ -58,7 +58,9 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
             setRenderReceivingAddress(address)
             setRecipient(Object.values(address)[0] || "")
         })
-        diagnoseTokenBalance();
+        // diagnoseTokenBalance();
+        checkAccount2Address();
+        checkInternalTransactions();
     }, [chainId])
     /**
      * 获取ABI

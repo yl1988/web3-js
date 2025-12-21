@@ -103,3 +103,45 @@ export async function diagnoseTokenBalance() {
         console.log("❌ 诊断失败:", error);
     }
 }
+
+// 检查账户2地址
+export async function checkAccount2Address() {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+
+    // 获取当前所有账户
+    const accounts = await provider.send("eth_accounts", []);
+
+    console.log("MetaMask 中的账户:");
+    accounts.forEach((addr, index) => {
+        console.log(`账户 ${index}: ${addr}`);
+    });
+
+    // 你的账户2地址是什么？
+    console.log("\n你的账户2地址是:", accounts[1] || "未找到");
+
+    return accounts[1];
+}
+
+// 查看交易的内部交易
+export async function checkInternalTransactions() {
+    const txHash = "0xe9df4a5e55998654b93c4bbab00be66eabc9bdeed4cc45340371756cb3a74733";
+
+    // 在 Etherscan 查看内部交易
+    console.log("🔗 查看内部交易详情:");
+    console.log(`https://sepolia.etherscan.io/tx/${txHash}#internal`);
+
+    // 或者使用 API
+    const response = await fetch(`https://api-sepolia.etherscan.io/api?module=account&action=txlistinternal&txhash=${txHash}&apikey=YourApiKey`);
+    const data = await response.json();
+
+    if (data.status === "1") {
+        console.log("内部交易:", data.result);
+
+        data.result.forEach((internalTx, index) => {
+            console.log(`内部交易 ${index}:`);
+            console.log(`  从: ${internalTx.from}`);
+            console.log(`  到: ${internalTx.to}`);
+            console.log(`  金额: ${ethers.formatEther(internalTx.value)} ETH`);
+        });
+    }
+}

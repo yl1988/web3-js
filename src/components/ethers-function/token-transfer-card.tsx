@@ -7,42 +7,50 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import CyberCard from "@/src/components/ui/card/cyber-card";
 import PageLoading from "@/src/components/page-loading";
 import CyberButton from "@/src/components/ui/cyber-button";
-import {isMetaMaskInstalled} from "@/src/utils/ethers-function";
+import {getHardhatAddresses, isMetaMaskInstalled} from "@/src/utils/ethers-function";
 import {ERC20_HUMAN_ABI} from "@/src/constants/abis/erc20-human-readable";
 import {ERC20_JSON_ABI} from "@/src/constants/abis/erc20-json";
 import {getEthersFunctions} from "@/src/lib/ethers";
+import { useChainId } from 'wagmi'
+import {useGlobalModal} from "@/src/components/ui/cyber-modal/global-modal";
 
 interface TokenTransferCardProps {
     ethersVersion: '5' | '6'
 }
 type AbiFormat = 'HUMAN' | 'JSON';
 
-// 常用的测试代币地址（以太坊主网）
-const TEST_TOKENS = {
-    USDT: '0xdAC17F958D2ee523a2206206994597C13D831ec7', // 6 decimals
-    USDC: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', // 6 decimals
-    DAI: '0x6B175474E89094C44Da98b954EedeAC495271d0F', // 18 decimals
-    LINK: '0x514910771AF9Ca656af840dff83E8264EcF986CA', // 18 decimals
-    UNI: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', // 18 decimals
-}
 
 export default function TokenTransferCard({ethersVersion}: TokenTransferCardProps) {
     const [abiFormat, setAbiFormat] = useState<AbiFormat>('HUMAN');
     const [loading, setLoading] = useState(false)
-    const [contractAddress, setContractAddress] = useState(TEST_TOKENS.USDT)
+    const [contractAddress, setContractAddress] = useState("")
+    const [renderAddress, setRenderAddress] = useState<{[k:string]: string}>({})
     const [recipient, setRecipient] = useState('')
     const [amount, setAmount] = useState('10')
     const [decimals, setDecimals] = useState(6)
     const [result, setResult] = useState<any>(null)
     const [error, setError] = useState<string>('')
+    const chainId = useChainId() // 获取当前链 ID
+    const modal = useGlobalModal()
+    // const { chains, switchChain } = useSwitchChain() // 切换链
+    // const { address, isConnected } = useAccount() // 账户信息
 
     // 获取当前版本的函数
     const functionEvents = getEthersFunctions(ethersVersion);
 
+    useEffect(() => {
+        // const tokens = getTestTokens(chainId)
+        // setRenderAddress(tokens)
+        getHardhatAddresses(chainId).then((address) => {
+            console.log('address:', address)
+            setRenderAddress(address)
+        })
+
+    }, [chainId])
     /**
      * 获取ABI
      */
@@ -87,24 +95,10 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
             setLoading(false)
         }
     }
-
     /**
-     * 代币转账处理（使用统一函数）
+     * 确认转账
      */
-    const handleTokenTransfer = async () => {
-        const isInstalled = await isMetaMaskInstalled()
-        if (!isInstalled) return
-
-        if (!recipient) {
-            setError('请输入接收地址')
-            return
-        }
-
-        if (!amount || Number(amount) <= 0) {
-            setError('请输入有效金额')
-            return
-        }
-
+    const confirmHandleTokenTransfer = async () => {
         try {
             setLoading(true)
             setError('')
@@ -145,6 +139,41 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
         } finally {
             setLoading(false)
         }
+    }
+    /**
+     * 代币转账处理（使用统一函数）
+     */
+    const handleTokenTransfer = async () => {
+        const isInstalled = await isMetaMaskInstalled()
+        if (!isInstalled) return
+        if (!recipient) {
+            setError('请输入接收地址')
+            return
+        }
+
+        if (!amount || Number(amount) <= 0) {
+            setError('请输入有效金额')
+            return
+        }
+        // 2. 根据网络选择策略
+        if (chainId === 1n) {
+            // 主网：严格验证 + 警告
+           modal.open({
+               title: '警告',
+               content: "⚠️ 主网操作！确认转账？",
+               showCancelButton: true,
+               confirmText: '确认转账',
+               cancelText: '取消转账',
+               size: 'sm',
+               theme: 'neon',
+               onConfirm: async () => {
+                   confirmHandleTokenTransfer()
+               }
+           })
+            return
+        }
+        confirmHandleTokenTransfer()
+
     };
 
     return (
@@ -193,16 +222,16 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
                                 <SelectGroup>
                                     <div className="flex items-center gap-4">
                                         <SelectLabel className="whitespace-nowrap text-md">
-                                            ABI 格式
+                                            选择合约地址
                                         </SelectLabel>
                                         <div className="flex-1">
-                                            <SelectTrigger className="w-[100px] text-cyber-blue-200">
-                                                <SelectValue placeholder="选择ABI 格式" />
+                                            <SelectTrigger className="w-[200px] text-cyber-blue-200">
+                                                <SelectValue placeholder="选择合约地址" />
                                             </SelectTrigger>
                                         </div>
                                     </div>
                                     <SelectContent>
-                                        {Object.entries(TEST_TOKENS).map(([symbol, address]) => (
+                                        {Object.entries(renderAddress).map(([symbol, address]) => (
                                             <SelectItem key={symbol} value={address}>
                                                 {symbol}
                                             </SelectItem>
@@ -258,12 +287,9 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
                             <Select value={decimals} onValueChange={setDecimals}>
                                 <SelectGroup>
                                     <div className="flex items-center gap-4">
-                                        <SelectLabel className="whitespace-nowrap text-md">
-                                            ABI 格式
-                                        </SelectLabel>
                                         <div className="flex-1">
                                             <SelectTrigger className="w-[200px] text-cyber-blue-200">
-                                                <SelectValue placeholder="选择ABI 格式" />
+                                                <SelectValue placeholder="选择小数位数" />
                                             </SelectTrigger>
                                         </div>
                                     </div>

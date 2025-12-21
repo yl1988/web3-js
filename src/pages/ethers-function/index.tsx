@@ -5,7 +5,6 @@ import PageLoading from '@/src/components/page-loading';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectLabel, SelectGroup } from '@/components/ui/select';
 import { getEthersFunctions } from '../../lib/ethers';
 import { CreateWalletInfo, EtherFunctionCardLoading } from '../../types/ethers-function';
-import { useGlobalModal } from '../../components/ui/cyber-modal/global-modal';
 import TokenTransferCard from "@/src/components/ethers-function/token-transfer-card";
 import {isMetaMaskInstalled} from "@/src/utils/ethers-function";
 
@@ -24,8 +23,6 @@ export default function EthersFunction() {
         mnemonic: '',
         walletInstance: null,
     });
-    const modal = useGlobalModal();
-    const [abiFormat, setAbiFormat] = useState('json'); // abi格式
 
 
     /**
@@ -86,14 +83,6 @@ export default function EthersFunction() {
             mnemonic: '',
             walletInstance: null,
         });
-    };
-
-    /**
-     * abi格式切换
-     * @param value
-     */
-    const abiFormatChange = (value: string) => {
-        setAbiFormat(value);
     };
 
     return <>

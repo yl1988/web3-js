@@ -48,6 +48,7 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
         getHardhatAddresses(chainId).then((address) => {
             console.log('address:', address)
             setRenderAddress(address)
+            setContractAddress(Object.values(address)[0] || "")
         })
 
     }, [chainId])

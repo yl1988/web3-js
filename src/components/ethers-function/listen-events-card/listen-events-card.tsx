@@ -2,6 +2,7 @@ import CyberButton from "@/src/components/ui/cyber-button";
 import {ethers} from "ethers";
 import {EnhancedTokenMonitor} from "./listen-events";
 import EthersFunctionCard from "../ethers-function-card";
+import ExpandToggleShowContainer from "@/src/components/ethers-function/expand-toggle-show-container";
 
 
 export default function ListenEventsCard() {
@@ -34,18 +35,14 @@ export default function ListenEventsCard() {
                 <>
                     <div className="mb-2 flex justify-between items-center">
                         <span className="mr-4">监听事件</span>
-                        {
-                            expand ? <>
-                                <CyberButton onClick={startListen}>开始监听</CyberButton>
-                                <CyberButton onClick={stopListen}>停止监听</CyberButton>
-                            </> : null
-                        }
+                        <ExpandToggleShowContainer expand={expand}>
+                            <CyberButton onClick={startListen}>开始监听</CyberButton>
+                            <CyberButton onClick={stopListen}>停止监听</CyberButton>
+                        </ExpandToggleShowContainer>
                     </div>
-                    {
-                        expand ? <>
-                            <p>监听结果：{monitor.isMonitoring ? '正在监听' : '已停止监听'}</p>
-                        </> : null
-                    }
+                    <ExpandToggleShowContainer expand={expand}>
+                        <p>监听结果：{monitor.isMonitoring ? '正在监听' : '已停止监听'}</p>
+                    </ExpandToggleShowContainer>
                 </>
             )
         }

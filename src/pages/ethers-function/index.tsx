@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import CyberCard from '@/src/components/ui/card/cyber-card';
 import CyberButton from '@/src/components/ui/cyber-button';
 import PageLoading from '@/src/components/page-loading';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectLabel, SelectGroup } from '@/components/ui/select';
@@ -8,8 +7,8 @@ import { CreateWalletInfo, EtherFunctionCardLoading } from '../../types/ethers-f
 import TokenTransferCard from "@/src/components/ethers-function/token-transfer-card";
 import {isMetaMaskInstalled} from "@/src/utils/ethers-function";
 import ListenEventsCard from "@/src/components/ethers-function/listen-events-card/listen-events-card";
-import CollapseExpandIcon from "@/src/components/ethers-function/collapse-expand-icon";
 import EthersFunctionCard from "@/src/components/ethers-function/ethers-function-card";
+import ExpandToggleShowContainer from "@/src/components/ethers-function/expand-toggle-show-container";
 
 const loadingDefault: EtherFunctionCardLoading = {
     connectWallet: false,
@@ -119,10 +118,14 @@ export default function EthersFunction() {
                         {({ expand }) => (
                             <PageLoading loading={cardLoading.connectWallet} size="mini">
                                 <div className="mb-2 flex justify-between items-center">
-                                    <span className="mr-4">连接钱包</span>
-                                    {expand ? <CyberButton onClick={handleConnectWallet}>点击连接</CyberButton> : null}
+                                    <span className="mr-4 h-8">连接钱包</span>
+                                    <ExpandToggleShowContainer expand={ expand}>
+                                        <CyberButton onClick={handleConnectWallet}>点击连接</CyberButton>
+                                    </ExpandToggleShowContainer>
                                 </div>
-                                {expand ? <p>钱包地址：{connectWalletAddress}</p> : null}
+                                <ExpandToggleShowContainer expand={ expand}>
+                                    <p>钱包地址：{connectWalletAddress}</p>
+                                </ExpandToggleShowContainer>
                             </PageLoading>
                         )}
                     </EthersFunctionCard>
@@ -133,16 +136,16 @@ export default function EthersFunction() {
                             ({ expand }) => (
                                 <PageLoading loading={cardLoading.createWallet} size="mini">
                                     <div className="mb-2 flex justify-between items-center">
-                                        <span className="mr-4">创建钱包实例</span>
-                                        { expand ? <CyberButton onClick={handleCreateWallet}>点击创建</CyberButton> : null}
+                                        <span className="mr-4 h-8">创建钱包实例</span>
+                                        <ExpandToggleShowContainer expand={ expand}>
+                                            <CyberButton onClick={handleCreateWallet}>点击创建</CyberButton>
+                                        </ExpandToggleShowContainer>
                                     </div>
-                                    {
-                                        expand ? <>
-                                            <p>钱包地址：{createWalletInfo.address}</p>
-                                            <p>privateKey：{createWalletInfo.privateKey}</p>
-                                            <p>mnemonic：{createWalletInfo.mnemonic}</p>
-                                        </> : null
-                                    }
+                                    <ExpandToggleShowContainer expand={ expand}>
+                                        <p>钱包地址：{createWalletInfo.address}</p>
+                                        <p>privateKey：{createWalletInfo.privateKey}</p>
+                                        <p>mnemonic：{createWalletInfo.mnemonic}</p>
+                                    </ExpandToggleShowContainer>
                                 </PageLoading>
                             )
                         }

@@ -115,7 +115,7 @@ export default function EthersFunction() {
                 </EthersFunctionCard>
                 <div className="flex-1 overflow-auto space-y-2">
                     {/* 连接钱包卡片 */}
-                    <EthersFunctionCard cardProps={{ className: "h-30" }}>
+                    <EthersFunctionCard>
                         {({ expand }) => (
                             <PageLoading loading={cardLoading.connectWallet} size="mini">
                                 <div className="mb-2 flex justify-between items-center">
@@ -128,7 +128,7 @@ export default function EthersFunction() {
                     </EthersFunctionCard>
 
                     {/* 创建钱包实例卡片 */}
-                    <EthersFunctionCard  cardProps={{className: "h-40"}}>
+                    <EthersFunctionCard>
                         {
                             ({ expand }) => (
                                 <PageLoading loading={cardLoading.createWallet} size="mini">

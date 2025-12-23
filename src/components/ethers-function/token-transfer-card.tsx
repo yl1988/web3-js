@@ -188,7 +188,11 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
     };
 
     return (
-        <EthersFunctionCard cardProps={{contentClassName:`${loading ? "h-[690px]" : ""}`}}>
+        <EthersFunctionCard cardProps={{
+            contentClassName:`${loading ? "h-[690px]" : ""}`,
+        }}
+                            expandClassName="min-h-[690px]"
+        >
             <PageLoading loading={loading} size="mini">
                 <div className="mb-4">
                     <div className="flex justify-between items-center mb-4">

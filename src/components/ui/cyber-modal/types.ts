@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 export interface ModalOptions {
     title?: ReactNode;
-    content: ReactNode;
+    content?: ReactNode;
     footer?: ReactNode;
     onClose?: () => void;
     onConfirm?: () => void | Promise<void>;
@@ -22,6 +22,7 @@ export interface ModalOptions {
     theme?: 'neon' | 'pink' | 'blue' | 'purple' | 'cyber';
     glowEffect?: boolean;
     borderStyle?: 'gradient' | 'solid' | 'dashed' | 'neon';
+    children?: ReactNode;
 }
 
 export interface ModalInstance {

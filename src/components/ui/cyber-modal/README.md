@@ -89,7 +89,7 @@ function someUtilityFunction() {
 组件直接使用
 
 ````typescript jsx
-import { Modal } from '@/components/ui/cyber-modal';
+import Modal from '@/components/ui/cyber-modal';
 
 function MyComponent() {
     const [isOpen, setIsOpen] = useState(false);

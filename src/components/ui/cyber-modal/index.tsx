@@ -33,6 +33,7 @@ const Modal: React.FC<ModalProps> = ({
                                          theme = 'cyber',
                                          glowEffect = true,
                                          borderStyle = 'gradient',
+                                         children
                                      }) => {
     const [isVisible, setIsVisible] = useState(false);
     const modalRef = useRef<HTMLDivElement>(null);
@@ -81,13 +82,6 @@ const Modal: React.FC<ModalProps> = ({
     };
 
     const selectedTheme = themeColors[theme];
-    const sizeClasses = {
-        sm: 'max-w-md',
-        md: 'max-w-lg',
-        lg: 'max-w-2xl',
-        xl: 'max-w-4xl',
-        full: 'max-w-90vw',
-    };
 
     useEffect(() => {
         if (isOpen) {
@@ -157,7 +151,7 @@ const Modal: React.FC<ModalProps> = ({
                     ref={modalRef}
                     className={cn(
                         'relative rounded-xl transition-all duration-300 transform pointer-events-auto',
-                        sizeClasses[size],
+
                         isOpen
                             ? 'opacity-100 translate-y-0 scale-100'
                             : 'opacity-0 translate-y-4 scale-95',
@@ -224,7 +218,7 @@ const Modal: React.FC<ModalProps> = ({
                             )}
                             style={{ maxHeight: 'calc(90vh - 140px)' }}
                         >
-                            {content}
+                            { children || content}
                         </div>
 
                         {/* 底部区域 */}

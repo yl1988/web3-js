@@ -11,6 +11,7 @@ import Head from "next/head";
 import PageHeader from "../components/page-header/page-header";
 import PageBackground from "../components/page-background";
 import {cyberpunkTheme} from "../../rainbowkit-theme";
+import {Providers} from "@/src/store/provider";
 
 const client = new QueryClient();
 
@@ -24,26 +25,28 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <link href="/favicon.ico" rel="icon" />
       </Head>
-      <WagmiProvider config={config}>
-          <QueryClientProvider client={client}>
-              <RainbowKitProvider theme={cyberpunkTheme}>
-                  <div className="p-x-2 flex flex-col min-h-screen">
-                      <PageBackground/>
-                      <div className="z-10 flex-1 flex flex-col">
-                          <PageHeader/>
-                          <Component {...pageProps} />
-                          {/* 添加全局弹窗容器 */}
-                          <GlobalModalContainer />
+      <Providers>
+          <WagmiProvider config={config}>
+              <QueryClientProvider client={client}>
+                  <RainbowKitProvider theme={cyberpunkTheme}>
+                      <div className="p-x-2 flex flex-col min-h-screen">
+                          <PageBackground/>
+                          <div className="z-10 flex-1 flex flex-col">
+                              <PageHeader/>
+                              <Component {...pageProps} />
+                              {/* 添加全局弹窗容器 */}
+                              <GlobalModalContainer />
+                          </div>
+                          <footer className={"flex py-4 border-t-1 border-gray-200 text-gray-100 justify-center items-center"}>
+                              <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
+                                  Made with ❤️ by your frens at 🌈
+                              </a>
+                          </footer>
                       </div>
-                      <footer className={"flex py-4 border-t-1 border-gray-200 text-gray-100 justify-center items-center"}>
-                          <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
-                              Made with ❤️ by your frens at 🌈
-                          </a>
-                      </footer>
-                  </div>
-              </RainbowKitProvider>
-          </QueryClientProvider>
-      </WagmiProvider>
+                  </RainbowKitProvider>
+              </QueryClientProvider>
+          </WagmiProvider>
+      </Providers>
   </>
 }
 

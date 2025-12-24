@@ -48,9 +48,6 @@ export default function EthersFunctionCard({cardProps = {}, children, expandClas
             return;
         }
         const currentHeight = height || cardRef.current?.offsetHeight || 0;
-        console.log('更新图标位置，高度:', currentHeight);
-        if (!cardRef.current) return;
-        const card = cardRef.current
         if (!expand) {
             // 折叠状态：图标在顶部
             setExpandIconPosition({

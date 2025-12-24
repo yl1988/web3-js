@@ -22,6 +22,9 @@ import { useChainId } from 'wagmi'
 import {useGlobalModal} from "@/src/components/ui/cyber-modal/global-modal";
 import {checkAccount2Address, checkInternalTransactions} from "../../utils/test-balence"
 import EthersFunctionCard from "@/src/components/ethers-function/ethers-function-card";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "@/src/store";
+import { updateContractAddress } from "@/src/store/ethers-function";
 
 interface TokenTransferCardProps {
     ethersVersion: '5' | '6'
@@ -32,7 +35,7 @@ type AbiFormat = 'HUMAN' | 'JSON';
 export default function TokenTransferCard({ethersVersion}: TokenTransferCardProps) {
     const [abiFormat, setAbiFormat] = useState<AbiFormat>('HUMAN');
     const [loading, setLoading] = useState(false)
-    const [contractAddress, setContractAddress] = useState("")
+    const { contractAddress } = useSelector((state: RootState) => state.ethersFunction)
     const [renderAddress, setRenderAddress] = useState<{[k:string]: string}>({}) // 渲染的代币地址
     const [renderReceivingAddress, setRenderReceivingAddress] = useState<{[k:string]: string}>({}) // 渲染的接收地址
     const [recipient, setRecipient] = useState('')
@@ -42,6 +45,7 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
     const [error, setError] = useState<string>('')
     const chainId = useChainId() // 获取当前链 ID
     const modal = useGlobalModal()
+    const dispatch = useDispatch<AppDispatch>()
 
     // 获取当前版本的函数
     const functionEvents = getEthersFunctions(ethersVersion);
@@ -52,7 +56,7 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
         getTokenContractAddresses(chainId).then((address) => {
             console.log('address:', address)
             setRenderAddress(address)
-            setContractAddress(Object.values(address)[0] || "")
+            dispatch(updateContractAddress(Object.values(address)[0] || ""))
         })
         getTokenReceivingWalletAddress(chainId).then((address) => {
             setRenderReceivingAddress(address)
@@ -228,12 +232,13 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
                             <input
                                 type="text"
                                 value={contractAddress}
-                                onChange={(e) => setContractAddress(e.target.value)}
+                                onChange={(e) => dispatch(updateContractAddress(e.target.value))}
                                 className="flex-1 px-3 py-2 bg-cyber-dark-300 border border-cyber-dark-400 rounded text-white text-sm"
                                 placeholder="输入代币合约地址"
                                 disabled={loading}
                             />
-                            <Select value={contractAddress} onValueChange={setContractAddress}>
+                            <Select value={contractAddress}
+                                    onValueChange={v=>dispatch(updateContractAddress(v))}>
                                 <SelectGroup>
                                     <div className="flex items-center gap-4">
                                         <SelectLabel className="whitespace-nowrap text-md">

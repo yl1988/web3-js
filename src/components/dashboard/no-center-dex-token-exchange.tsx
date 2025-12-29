@@ -804,7 +804,7 @@ export default function DEXSwapCard({ ethersVersion }: DEXSwapCardProps) {
                                         </div>
                                     ) : (
                                         <div className="p-4 bg-cyber-dark-300 rounded border border-cyber-dark-400 text-center text-gray-400">
-                                            点击"更新报价"获取实时价格
+                                            点击&quot;更新报价&quot;获取实时价格
                                         </div>
                                     )}
                                 </div>

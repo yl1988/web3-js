@@ -42,7 +42,7 @@ export default function EthersFunction() {
             const signer = await functionEvents.connectWallet();
             const address = await signer.getAddress();
             setConnectWalletAddress(address);
-        } catch (error) {
+        } catch (error:any) {
             console.error('连接钱包失败:', error);
         } finally {
             setCardLoading({ ...loadingDefault });
@@ -60,7 +60,7 @@ export default function EthersFunction() {
             const walletInfo = functionEvents.createWallet();
             setCreateWalletInfo(walletInfo);
             console.log('创建的钱包:', walletInfo);
-        } catch (error) {
+        } catch (error:any) {
             console.error('创建钱包失败:', error);
         }
     };
@@ -145,7 +145,7 @@ export default function EthersFunction() {
                                     <ExpandToggleShowContainer expand={ expand}>
                                         <p>钱包地址：{createWalletInfo.address}</p>
                                         <p>privateKey：{createWalletInfo.privateKey}</p>
-                                        <p>mnemonic：{createWalletInfo.mnemonic}</p>
+                                        <p>mnemonic：{createWalletInfo.mnemonic + ""}</p>
                                     </ExpandToggleShowContainer>
                                 </PageLoading>
                             )

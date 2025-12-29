@@ -49,7 +49,7 @@ export const sepoliaVerifiedTokenAddresses = {
  * @param {number} chainId - 网络链ID
  * @returns {Promise<Array<string> | Object<string, string>>} 返回地址数组或代币映射对象
  */
-export const getTokenContractAddresses = async (chainId):Promise<{[key: string]: string }> => {
+export const getTokenContractAddresses = async (chainId:number):Promise<{[key: string]: string }> => {
     // 1. 检查MetaMask是否安装（用于后续钱包连接场景）
     await isMetaMaskInstalled();
 
@@ -62,7 +62,7 @@ export const getTokenContractAddresses = async (chainId):Promise<{[key: string]:
             size: 'sm',
             theme: 'neon'
         });
-        return chainId === 31337 ? [] : {};
+        return {};
     }
 
     // 3. 根据网络类型采用不同策略获取地址
@@ -113,7 +113,7 @@ export const sepoliaReceivingWalletAddresses = {
  * @param {number} chainId - 网络链ID
  * @returns {Promise<string>} 账户地址
  */
-export const getTokenReceivingWalletAddress = async (chainId):Promise<{[key: string]: string }> => {
+export const getTokenReceivingWalletAddress = async (chainId: number):Promise<{[key: string]: string }> => {
     // 1. 检查MetaMask是否安装（用于后续钱包连接场景）
     await isMetaMaskInstalled();
 
@@ -134,7 +134,7 @@ export const getTokenReceivingWalletAddress = async (chainId):Promise<{[key: str
             const provider = new ethers.JsonRpcProvider(localNetRequestAddress);
             try {
                 // 方法1：直接查询节点账户（仅本地网络有效）
-                const accounts = await provider.send('eth_accounts', []);
+                const accounts:string[] = await provider.send('eth_accounts', []);
                 console.log('(本地网络)通过 eth_accounts 获取:', accounts);
 
                 // 如果查询失败，则返回预定义的地址列表
@@ -142,7 +142,7 @@ export const getTokenReceivingWalletAddress = async (chainId):Promise<{[key: str
                     result[`LOCAL_TOKEN_${index + 1}`] = current
                     return result
                 }, {} as { [key: string]: string })
-            } catch (error) {
+            } catch (error:any) {
                 console.warn('获取本地账户失败，返回预置地址:', error);
                 return {}
             }

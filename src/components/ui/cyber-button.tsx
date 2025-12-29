@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@/lib/utils"; // 假设你有 cn 工具函数
+import { cn } from "@/src/utils/utils"; // 假设你有 cn 工具函数
 
 export type CyberButtonVariant =
     | 'primary'     // 主要按钮（默认）
@@ -222,7 +222,7 @@ export default function CyberButton({
             )}
 
             {/* 悬停背景层 - 针对 outline 和 ghost 变体 */}
-            {(variant === 'outline' || variant === 'ghost') && !disabled && !loading && (
+            {(variant === 'ghost') && !disabled && !loading && (
                 <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{
@@ -248,10 +248,4 @@ export default function CyberButton({
       </span>
         </button>
     );
-}
-
-// 如果你还没有 cn 工具函数，可以添加这个：
-// src/lib/utils.ts
-export function cn(...classes: (string | boolean | undefined | null)[]) {
-    return classes.filter(Boolean).join(' ');
 }

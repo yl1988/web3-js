@@ -26,7 +26,7 @@ async function fetchRealAaveData() {
             utilization: pool.totalBorrowUsd ?
                 ((pool.totalBorrowUsd / pool.totalSupplyUsd) * 100).toFixed(1) : '0.0',
         }));
-    } catch (error) {
+    } catch (error:any) {
         console.error('Error fetching DeFiLlama data:', error);
         return null;
     }
@@ -65,7 +65,7 @@ async function fetchRealPrices(symbols: string[]) {
         });
 
         return prices;
-    } catch (error) {
+    } catch (error:any) {
         console.error('Error fetching CoinGecko data:', error);
         return {};
     }
@@ -83,7 +83,7 @@ async function fetchTestnetAaveData(chainId: number) {
             { symbol: 'ETH', supplyAPY: '2.85', borrowAPY: '3.50', totalSupplyUsd: 500000, totalBorrowUsd: 200000, utilization: '40.0' },
             { symbol: 'USDC', supplyAPY: '1.25', borrowAPY: '2.10', totalSupplyUsd: 300000, totalBorrowUsd: 120000, utilization: '40.0' },
         ];
-    } catch (error) {
+    } catch (error:any) {
         console.error('Error fetching testnet Aave data:', error);
         return null;
     }
@@ -271,7 +271,7 @@ async function fetchAaveData(chainId: number) {
             // 测试网可以从 Aave 测试网 API 获取
             return await fetchTestnetAaveData(chainId);
         }
-    } catch (error) {
+    } catch (error:any) {
         console.error('Error fetching Aave data:', error);
         return null;
     }
@@ -328,7 +328,7 @@ async function fetchRealMarketData(chainId: number) {
             dataSource: aaveData ? 'real' : 'default',
         };
 
-    } catch (error) {
+    } catch (error:any) {
         console.error('Error fetching market data:', error);
         return getFallbackData(chainId);
     }

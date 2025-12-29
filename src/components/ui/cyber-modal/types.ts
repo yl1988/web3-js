@@ -9,6 +9,7 @@ export interface ModalOptions {
     onConfirm?: () => void | Promise<void>;
     showCloseButton?: boolean;
     showConfirmButton?: boolean;
+    showCancelButton?: boolean;
     confirmText?: string;
     cancelText?: string;
     size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';

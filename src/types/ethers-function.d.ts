@@ -16,14 +16,14 @@ export interface TokenTransferParams {
     contractAddress: string,
     to: string,
     amount: string,
-    ERC20_ABI: any[],
+    ERC20_ABI: readonly any[],
     decimals?: number
 }
 export interface WalletFunctions {
     connectWallet: () => Promise<any>;
     createWallet: () => CreateWalletInfo;
     tokenTransfer: (params:TokenTransferParams) => Promise<any>;
-    getTokenInfo: (contractAddress: string, ERC20_ABI: any[]) => Promise<{
+    getTokenInfo: (contractAddress: string, ERC20_ABI: readonly any[]) => Promise<{
         name: string,
         symbol: string,
         decimals: number,

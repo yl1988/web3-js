@@ -1,6 +1,6 @@
 // components/cyber-alert.tsx
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/src/utils/utils"
 import {
     XCircle,
 } from "lucide-react"

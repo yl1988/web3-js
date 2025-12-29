@@ -134,7 +134,7 @@ export class EnhancedTokenMonitor {
                 polling: false, // 禁用轮询
             });
 
-        } catch (error) {
+        } catch (error:any) {
             console.error("创建单一 provider 失败:", error);
             // 如果失败，尝试创建最简化的 provider
             return new ethers.JsonRpcProvider('http://localhost:8545');
@@ -187,7 +187,7 @@ export class EnhancedTokenMonitor {
                 console.log("⏭️ 跳过历史事件查询");
             }
 
-        } catch (error) {
+        } catch (error:any) {
             console.error("启动监听失败:", error);
             this.cleanupListeners();
             throw error;
@@ -207,7 +207,7 @@ export class EnhancedTokenMonitor {
             }
 
             return true;
-        } catch (error) {
+        } catch (error:any) {
             console.error("检查 Transfer 事件失败:", error);
             return false;
         }
@@ -287,7 +287,7 @@ export class EnhancedTokenMonitor {
                     // 处理事件
                     await this.handleTransfer(from, to, safeValue, eventLog);
 
-                } catch (error) {
+                } catch (error:any) {
                     console.error('监听器回调错误:', error);
                 }
             };
@@ -308,7 +308,7 @@ export class EnhancedTokenMonitor {
 
             console.log("✅ 事件监听器已绑定");
 
-        } catch (error) {
+        } catch (error:any) {
             console.error("绑定监听器失败:", error);
             throw error;
         }
@@ -343,7 +343,7 @@ export class EnhancedTokenMonitor {
                 await this.processEvents(events);
             }
 
-        } catch (error) {
+        } catch (error:any) {
             console.error("安全查询历史事件失败:", error);
             // 不抛出，只记录
         }
@@ -426,7 +426,7 @@ export class EnhancedTokenMonitor {
             const blockNumber = await this.effectiveProvider.getBlockNumber();
             this.debugLog(`获取区块高度成功: ${blockNumber}`);
             return blockNumber;
-        } catch (error) {
+        } catch (error:any) {
             console.error("获取区块高度失败:", error);
 
             // 如果失败，返回一个安全的默认值
@@ -456,7 +456,7 @@ export class EnhancedTokenMonitor {
                             await new Promise(resolve => setTimeout(resolve, 10));
                         }
 
-                    } catch (error) {
+                    } catch (error:any) {
                         console.warn("处理历史事件失败:", error);
                     }
                 }
@@ -520,7 +520,7 @@ export class EnhancedTokenMonitor {
                     blockNumber: event.blockNumber,
                 });
             }
-        } catch (error) {
+        } catch (error:any) {
             console.error("处理转账事件出错:", error);
             // 安全的错误日志
             this.logErrorSafely('handleTransfer', error, { from, to, value });
@@ -559,7 +559,7 @@ export class EnhancedTokenMonitor {
     private formatUnitsSafely(value: bigint, decimals: number): string {
         try {
             return ethers.formatUnits(value, decimals);
-        } catch (error) {
+        } catch (error:any) {
             console.warn('ethers.formatUnits 失败，使用手动计算:', error);
 
             // 手动计算
@@ -624,7 +624,7 @@ export class EnhancedTokenMonitor {
             // 基本类型直接返回
             return data;
 
-        } catch (error) {
+        } catch (error:any) {
             return '[无法序列化数据]';
         }
     }
@@ -711,7 +711,7 @@ export class EnhancedTokenMonitor {
             // 使用 ethers 的 formatUnits
             return ethers.formatUnits(bigintValue, decimals);
 
-        } catch (error) {
+        } catch (error:any) {
             console.error('❌ safeFormatUnits 失败:', error, {
                 value,
                 valueType: typeof value,
@@ -777,7 +777,7 @@ export class EnhancedTokenMonitor {
             // }
 
             return true;
-        } catch (error) {
+        } catch (error:any) {
             console.error('pass_Filters 出错:', error);
             return false;
         }
@@ -896,7 +896,7 @@ export class EnhancedTokenMonitor {
                 this.contract.decimals(),
             ]);
             return { name, symbol, decimals, address: this.contract.target };
-        } catch (error) {
+        } catch (error:any) {
             console.error("获取合约信息失败:", error);
             return null;
         }

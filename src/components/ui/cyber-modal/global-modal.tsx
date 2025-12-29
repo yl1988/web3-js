@@ -1,7 +1,7 @@
 // src/components/ui/cyber-modal/global-modal.tsx
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Modal from './index';
 

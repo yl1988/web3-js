@@ -65,10 +65,6 @@ const DEX_CONFIGS = {
     // 其他网络配置可以暂时不添加
 };
 
-interface DEXSwapCardProps {
-    ethersVersion: '5' | '6'
-}
-
 interface SwapHistory {
     id: string;
     timestamp: number;
@@ -81,7 +77,7 @@ interface SwapHistory {
     status: 'pending' | 'success' | 'failed';
 }
 
-export default function DEXSwapCard({ ethersVersion }: DEXSwapCardProps) {
+export default function DEXSwapCard() {
     const [loading, setLoading] = useState(false);
     const [previewLoading, setPreviewLoading] = useState(false);
     const [renderAddress, setRenderAddress] = useState<{ [k: string]: string }>({});
@@ -105,9 +101,7 @@ export default function DEXSwapCard({ ethersVersion }: DEXSwapCardProps) {
     const [result, setResult] = useState<any>(null);
     const [error, setError] = useState<string>('');
     const chainId = useChainId();
-    const modal = useGlobalModal();
     const dispatch = useDispatch<AppDispatch>();
-    const functionEvents = getEthersFunctions(ethersVersion);
 
     // 可用的 DEX 列表（现在只有 SimpleDEX）
     const availableDexes = DEX_CONFIGS[chainId as keyof typeof DEX_CONFIGS]?.routers || [];

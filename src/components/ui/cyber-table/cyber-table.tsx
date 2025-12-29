@@ -1,9 +1,8 @@
 // components/cyber-table.tsx
 "use client"
 
-import { ReactNode } from "react"
-import { cn } from "@/lib/utils"
-import { ArrowUpDown, ChevronDown, ChevronUp } from "lucide-react"
+import { cn } from "@/src/utils/utils"
+import {  ChevronDown, ChevronUp } from "lucide-react"
 import {PaginationOptions} from "@/src/types/pagination";
 
 export interface CyberTableColumn<T> {
@@ -15,19 +14,19 @@ export interface CyberTableColumn<T> {
   className?: string
 }
 
-export interface CyberTableProps<T,K> {
+export interface CyberTableProps<T> {
     columns: CyberTableColumn<T>[]
-    data: K[]
-    sortField?: keyof K
+    data: T[]
+    sortField?: keyof T
     sortDirection?: "asc" | "desc"
-    onSort?: (field: keyof K) => void
-    onRowClick?: (row: K) => void
+    onSort?: (field: keyof T) => void
+    onRowClick?: (row: T) => void
     className?: string
     emptyMessage?: string
     pagination?: PaginationOptions
 }
 
-export function CyberTable<T,K>({
+export function CyberTable<T>({
                                 columns,
                                 data,
                                 sortField,
@@ -37,7 +36,7 @@ export function CyberTable<T,K>({
                                 className,
                                 emptyMessage = "No data available",
                                   pagination
-                              }: CyberTableProps<T,K>) {
+                              }: CyberTableProps<T>) {
 
     const defautlPaginationOptions:PaginationOptions = {
         current: 1,
@@ -118,13 +117,13 @@ export function CyberTable<T,K>({
                             <div className="flex flex-col">
                               <ChevronUp className={cn(
                                   "w-3 h-3",
-                                  sortField === column.key && sortDirection === "asc"
+                                  sortField && sortField === column.key && sortDirection === "asc"
                                       ? "text-cyber-neon-400"
                                       : "text-gray-500 group-hover:text-gray-400"
                               )} />
                               <ChevronDown className={cn(
                                   "w-3 h-3 -mt-1",
-                                  sortField === column.key && sortDirection === "desc"
+                                  sortField && sortField === column.key && sortDirection === "desc"
                                       ? "text-cyber-neon-400"
                                       : "text-gray-500 group-hover:text-gray-400"
                               )} />

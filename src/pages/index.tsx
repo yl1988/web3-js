@@ -32,7 +32,7 @@ const Dashboard: NextPage = () => {
    * 获取供应详情
    * @param value
    */
-  const onSupllyDetails = (value:string) => {
+  const onDetails = (value:string) => {
     console.log(value)
   }
   /**
@@ -76,8 +76,8 @@ const Dashboard: NextPage = () => {
    * @param marketData
    */
   function useUserPortfolioValue(address: `0x${string}`, marketData: any) {
-    const { data: balances } = useUserTokenBalances(address);
-
+    const { data } = useUserTokenBalances(address);
+    const balances = data as unknown as Record<string, string>;
     return useMemo(() => {
       if (!balances || !marketData?.reserves) return null;
 
@@ -109,14 +109,15 @@ const Dashboard: NextPage = () => {
    */
   function RealTimeMarket({ userAddress }: { userAddress: `0x${string}` }) {
     const chainId = useChainId();
-    const { data: balances, isLoading: balancesLoading } = useUserTokenBalances(userAddress);
+    const { data: balancesData, isLoading: balancesLoading } = useUserTokenBalances(userAddress);
     const { data: marketData, isLoading: marketLoading, refetch: refetchMarket } = useRealMarketData();
+    const balances = balancesData as Record<string, string>;
     const portfolio = useUserPortfolioValue(userAddress, marketData);
     const [lastUpdated, setLastUpdated] = useState<string>('');
     const [refreshing, setRefreshing] = useState(false);
 
     // 合并数据
-    const marketItems:DashboardSupplyAssetData = useMemo(() => {
+    const marketItems:DashboardSupplyAssetData[] = useMemo(() => {
       if (!marketData?.reserves || !balances) return [];
 
       return marketData.reserves.map((token: any) => {
@@ -153,7 +154,7 @@ const Dashboard: NextPage = () => {
       try {
         await refetchMarket();
         setLastUpdated(new Date().toLocaleTimeString());
-      } catch (error) {
+      } catch (error:any) {
         console.error('refresh failed:', error);
       } finally {
         setRefreshing(false);
@@ -254,7 +255,7 @@ const Dashboard: NextPage = () => {
             </div>
           </div>
           <div className="flex  gap-4">
-            <IndexContentListCard title={"Assets to supply and borrow"} columns={ columns({chainId, onSuplly, onSupllyDetails})} data={marketItems}/>
+            <IndexContentListCard title={"Assets to supply and borrow"} columns={ columns({chainId: chainId as number, onSuplly, onDetails})} data={marketItems}/>
           </div>
           {/* 底部统计信息 */}
           <BottomCount chainId={chainId} marketData={marketData} marketItems={marketItems}/>
@@ -282,7 +283,7 @@ const Dashboard: NextPage = () => {
 
   return <>
     <main className="flex flex-col flex-1 justify-center items-center">
-      <RealTimeMarket userAddress={address}/>
+      {address ? <RealTimeMarket userAddress={address}/> : null}
     </main>
     <PureSVGHalo/>
     {/*底部模糊层 */}

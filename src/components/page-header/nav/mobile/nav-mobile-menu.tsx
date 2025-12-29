@@ -17,7 +17,7 @@ export default function NavMobileMenu({show, onClose}:{show: boolean, onClose: (
 
     return <div className={`fixed z-50 w-full h-full top-0 transition-all duration-300 ${show ? "left-0" : "-left-full"}`}>
         <nav className={`w-9/12 h-full overflow-auto relative pl-4 pr-18 pt-10 pb-20 flex flex-col bg-cyber-dark-400/90 gap-1`}
-             style={{"box-shadow": "1px 0 20px 20px RGBA(230, 255, 245, 0.1)"}}
+             style={{"boxShadow": "1px 0 20px 20px RGBA(230, 255, 245, 0.1)"}}
         >
             <NavLink href="/" onClick={() => onLinkClick("/")}>
           <span className="flex items-center gap-2">

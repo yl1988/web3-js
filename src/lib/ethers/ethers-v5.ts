@@ -103,7 +103,7 @@ export const tokenTransfer_v5 = async (params: TokenTransferParams) => {
 /**
  * v5 获取代币信息
  */
-export const getTokenInfo_v5 = async (contractAddress: string, ERC20_ABI: any[]) => {
+export const getTokenInfo_v5 = async (contractAddress: string, ERC20_ABI: readonly any[]) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const contract = new ethers.Contract(contractAddress, ERC20_ABI, provider)
 

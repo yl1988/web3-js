@@ -28,7 +28,7 @@ import { updateContractAddress } from "@/src/store/ethers-function";
 import Modal from '../../components/ui/cyber-modal';
 
 interface TokenTransferCardProps {
-    ethersVersion: '5' | '6'
+    ethersVersion: string
 }
 type AbiFormat = 'HUMAN' | 'JSON';
 
@@ -41,7 +41,7 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
     const [renderReceivingAddress, setRenderReceivingAddress] = useState<{[k:string]: string}>({}) // 渲染的接收地址
     const [recipient, setRecipient] = useState('')
     const [amount, setAmount] = useState('0.001')
-    const [decimals, setDecimals] = useState(6)
+    const [decimals, setDecimals] = useState("6")
     const [result, setResult] = useState<any>(null)
     const [error, setError] = useState<string>('')
     const chainId = useChainId() // 获取当前链 ID
@@ -80,7 +80,7 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
      * 获取ABI
      */
     const getABI = () => {
-        const abiData: Record<AbiFormat, any[]> = {
+        const abiData: Record<AbiFormat, readonly any[]> = {
             HUMAN: ERC20_HUMAN_ABI,
             JSON: ERC20_JSON_ABI
         }
@@ -122,7 +122,7 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
             const ERC20_ABI = getABI()
             const tokenInfo = await functionEvents.getTokenInfo(contractAddress, ERC20_ABI)
 
-            setDecimals(tokenInfo.decimals)
+            setDecimals(tokenInfo.decimals + "")
 
             setResult({
                 type: 'token_info',
@@ -161,7 +161,7 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
                 to: recipient,
                 amount,
                 ERC20_ABI,
-                decimals
+                decimals: Number(decimals)
             })
 
             setResult({
@@ -195,7 +195,7 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
             return
         }
         // 2. 根据网络选择策略
-        if (chainId === 1n) {
+        if (BigInt(chainId) === 1n) {
             // 主网：严格验证 + 警告
            modal.open({
                title: '警告',
@@ -364,10 +364,10 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
                                         </div>
                                     </div>
                                     <SelectContent>
-                                        <SelectItem value={6}>6（USDT/USDC）</SelectItem>
-                                        <SelectItem value={18}>18（ETH/DAI）</SelectItem>
-                                        <SelectItem value={8}>8（WBTC）</SelectItem>
-                                        <SelectItem value={9}>9</SelectItem>
+                                        <SelectItem value="6">6（USDT/USDC）</SelectItem>
+                                        <SelectItem value="18">18（ETH/DAI）</SelectItem>
+                                        <SelectItem value={"8"}>8（WBTC）</SelectItem>
+                                        <SelectItem value={"9"}>9</SelectItem>
                                     </SelectContent>
                                 </SelectGroup>
                             </Select>

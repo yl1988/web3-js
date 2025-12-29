@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/src/utils/utils';
 import { ModalOptions } from './types';
 import CyberButton from '@/src/components/ui/cyber-button';
 
@@ -23,7 +23,6 @@ const Modal: React.FC<ModalProps> = ({
                                          showCancelButton = true,
                                          confirmText = '确认',
                                          cancelText = '取消',
-                                         size = 'md',
                                          closeOnOverlayClick = true,
                                          closeOnEsc = true,
                                          className,
@@ -231,7 +230,6 @@ const Modal: React.FC<ModalProps> = ({
                                         <CyberButton
                                             variant="cancel"
                                             onClick={onClose}
-                                            theme={selectedTheme.buttonTheme}
                                         >
                                             {cancelText}
                                         </CyberButton>
@@ -239,7 +237,6 @@ const Modal: React.FC<ModalProps> = ({
                                     {showConfirmButton && (
                                         <CyberButton
                                             onClick={handleConfirm}
-                                            theme={selectedTheme.buttonTheme}
                                         >
                                             {confirmText}
                                         </CyberButton>

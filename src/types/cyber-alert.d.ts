@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import {LucideIcon} from "lucide-react";
 
 export type AlertType = "success" | "info" | "warning" | "error" | "cyber"
 export type AlertSize = "small" | "middle" | "large" | "xlLarge" | "2xlLarge" | "3xlLarge"
@@ -15,7 +15,7 @@ export interface CyberAlertProps {
 }
 
 export interface TypeConfigItem {
-    icon: ReactNode
+    icon: LucideIcon
     titleColor: string
     bgColor: string
     iconColor: string

@@ -13,13 +13,13 @@ import {
 import {CyberAlert} from "@/src/components/ui/cyber-alert/cyber-alert";
 import {CyberTable, CyberTableColumn} from "@/src/components/ui/cyber-table/cyber-table";
 
-interface Props<T,K> {
+interface Props<T> {
     title: string,
     columns: CyberTableColumn<T>[],
-    data: K[],
+    data: T[],
 }
 
-export default function IndexContentListCard<T,K>({title, columns, data}: Props<T,K>) {
+export default function IndexContentListCard<T>({title, columns, data}: Props<T>) {
 
     const [isOpen, setIsOpen] = useState(true);
     const [value, setValue] = useState("all")

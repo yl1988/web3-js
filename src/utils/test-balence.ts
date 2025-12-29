@@ -26,7 +26,7 @@ export async function diagnoseTokenBalance() {
         }
 
         // 2. 检查当前账户
-        const accounts = await provider.send("eth_accounts", []);
+        const accounts:string[] = await provider.send("eth_accounts", []);
         if (accounts.length === 0) {
             console.log("⚠️ 钱包未连接，请先连接");
             return;
@@ -90,7 +90,7 @@ export async function diagnoseTokenBalance() {
                 console.log(`    原始值: ${balance.toString()}`);
                 console.log(`    小数位: ${decimals}`);
 
-            } catch (error) {
+            } catch (error:any) {
                 console.log(`  ❌ ${token.name} 查询失败:`, error.message);
             }
         }
@@ -99,7 +99,7 @@ export async function diagnoseTokenBalance() {
         const ethBalance = await provider.getBalance(currentAccount);
         console.log("\n⛽ ETH 余额:", ethers.formatEther(ethBalance), "ETH");
 
-    } catch (error) {
+    } catch (error:any) {
         console.log("❌ 诊断失败:", error);
     }
 }
@@ -109,7 +109,7 @@ export async function checkAccount2Address() {
     const provider = new ethers.BrowserProvider(window.ethereum);
 
     // 获取当前所有账户
-    const accounts = await provider.send("eth_accounts", []);
+    const accounts:string[] = await provider.send("eth_accounts", []);
 
     console.log("MetaMask 中的账户:");
     accounts.forEach((addr, index) => {
@@ -132,12 +132,12 @@ export async function checkInternalTransactions() {
 
     // 或者使用 API
     const response = await fetch(`https://api-sepolia.etherscan.io/api?module=account&action=txlistinternal&txhash=${txHash}&apikey=YourApiKey`);
-    const data = await response.json();
+    const data:any = await response.json();
 
     if (data.status === "1") {
         console.log("内部交易:", data.result);
 
-        data.result.forEach((internalTx, index) => {
+        data.result.forEach((internalTx:any, index:number) => {
             console.log(`内部交易 ${index}:`);
             console.log(`  从: ${internalTx.from}`);
             console.log(`  到: ${internalTx.to}`);

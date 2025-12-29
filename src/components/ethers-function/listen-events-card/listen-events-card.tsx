@@ -36,7 +36,7 @@ function safeJsonStringify(data: any, indent?: number): string {
 
     try {
         return JSON.stringify(data, replacer, indent);
-    } catch (error) {
+    } catch (error:any) {
         console.error('JSON 序列化失败:', error);
         return `{ "error": "无法序列化数据", "message": "${error instanceof Error ? error.message : String(error)}" }`;
     }
@@ -53,7 +53,7 @@ function safeJsonParse(jsonString: string): any {
 
     try {
         return JSON.parse(jsonString, reviver);
-    } catch (error) {
+    } catch (error:any) {
         console.error('JSON 解析失败:', error);
         return null;
     }

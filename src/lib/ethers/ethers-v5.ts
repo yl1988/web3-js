@@ -73,7 +73,9 @@ export const tokenTransfer_v5 = async (params: TokenTransferParams) => {
     })
 
     // 5. 发送转账交易
-    const tx = await contract.transfer(to, parsedAmount)
+    const tx = await contract.transfer(to, parsedAmount, {
+        gasLimit: 100000, // 手动设置 gas limit
+    })
 
     console.log('交易已发送，等待确认...', {
         hash: tx.hash,

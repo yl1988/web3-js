@@ -40,7 +40,7 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
     const [renderAddress, setRenderAddress] = useState<{[k:string]: string}>({}) // 渲染的代币地址
     const [renderReceivingAddress, setRenderReceivingAddress] = useState<{[k:string]: string}>({}) // 渲染的接收地址
     const [recipient, setRecipient] = useState('')
-    const [amount, setAmount] = useState('10')
+    const [amount, setAmount] = useState('0.001')
     const [decimals, setDecimals] = useState(6)
     const [result, setResult] = useState<any>(null)
     const [error, setError] = useState<string>('')
@@ -214,6 +214,8 @@ export default function TokenTransferCard({ethersVersion}: TokenTransferCardProp
         confirmHandleTokenTransfer()
 
     };
+
+
 
     return <>
         <EthersFunctionCard cardProps={{

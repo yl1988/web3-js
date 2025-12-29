@@ -46,16 +46,17 @@ export const tokenTransfer_v6 = async (params: TokenTransferParams) => {
         ERC20_ABI,
         decimals = 18
     } = params
-    // 1. 创建 Provider
+
+    // // 1. 创建 Provider
     const provider = new ethers.BrowserProvider(window.ethereum)
-
-    // 2. 获取 Signer（注意：v6 是异步）
+    //
+    // // 2. 获取 Signer（注意：v6 是异步）
     const signer = await provider.getSigner()
-
-    // 3. 创建合约实例
+    //
+    // // 3. 创建合约实例
     const contract = new ethers.Contract(contractAddress, ERC20_ABI, signer)
-
-    // 4. 解析金额（v6 去掉 utils）
+    //
+    // // 4. 解析金额（v6 去掉 utils）
     const parsedAmount = ethers.parseUnits(amount, decimals)
 
     console.log('发送转账交易...', {
@@ -66,8 +67,14 @@ export const tokenTransfer_v6 = async (params: TokenTransferParams) => {
         decimals
     })
 
-    // 5. 发送转账交易
-    const tx = await contract.transfer(to, parsedAmount)
+    // // 5. 发送转账交易
+    const tx = await contract.transfer(to, parsedAmount,{
+        gasLimit: 150000,
+        // maxFeePerGas: ethers.parseUnits('20', 'gwei')
+        // gasLimit: 100000, // 手动设置 gas limit
+        // maxPriorityFeePerGas: ethers.parseUnits('1.5', 'gwei'), // 可选
+        // maxFeePerGas: ethers.parseUnits('2', 'gwei'), // 可选
+    })
 
     console.log('交易已发送，等待确认...', {
         hash: tx.hash,
@@ -76,6 +83,7 @@ export const tokenTransfer_v6 = async (params: TokenTransferParams) => {
     })
 
     // 6. 等待交易确认
+    console.log('成功! 哈希:', tx.hash)
     const receipt = await tx.wait()
 
     console.log('交易已确认', {

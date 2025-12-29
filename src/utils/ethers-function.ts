@@ -34,10 +34,11 @@ export const isMetaMaskInstalled = () => {
  * 这些是公开、常用的测试代币，通常部署者会预置余额或提供水龙头，适合测试。
  */
 export const sepoliaVerifiedTokenAddresses = {
+    'ETH': '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE', // 使用特殊标记
     // Sepolia上的Wrapped Ether (WETH)，是许多DEX的基础[citation:5]
     'WETH': '0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14',
     // Sepolia上的USDC测试代币，Circle官方提供水龙头[citation:5]
-    'USDC': '0x1c7D4B196Cb0C7B01d743Fbc6116a902379c7238',
+    'USDC': '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
     // 一个通用的测试ERC20代币示例，常用于开发教程[citation:9]
     'TEST_ERC20': '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8',
     // 你的MetaNode Token合约（如果已部署并已验证）

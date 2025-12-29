@@ -15,19 +15,19 @@ export interface CyberTableColumn<T> {
   className?: string
 }
 
-export interface CyberTableProps<T> {
+export interface CyberTableProps<T,K> {
     columns: CyberTableColumn<T>[]
-    data: T[]
-    sortField?: keyof T
+    data: K[]
+    sortField?: keyof K
     sortDirection?: "asc" | "desc"
-    onSort?: (field: keyof T) => void
-    onRowClick?: (row: T) => void
+    onSort?: (field: keyof K) => void
+    onRowClick?: (row: K) => void
     className?: string
     emptyMessage?: string
     pagination?: PaginationOptions
 }
 
-export function CyberTable<T>({
+export function CyberTable<T,K>({
                                 columns,
                                 data,
                                 sortField,
@@ -37,7 +37,7 @@ export function CyberTable<T>({
                                 className,
                                 emptyMessage = "No data available",
                                   pagination
-                              }: CyberTableProps<T>) {
+                              }: CyberTableProps<T,K>) {
 
     const defautlPaginationOptions:PaginationOptions = {
         current: 1,

@@ -6,7 +6,7 @@ import {useState, ReactNode, useEffect, useRef, useCallback} from "react";
 interface Props {
     cardProps?: { [k: string]: string };
     expandClassName?: string;
-    children?: (props: { expand: boolean; setExpand: (value: boolean) => void }) => ReactNode;
+    children?: ReactNode | ((props: { expand: boolean; setExpand: (value: boolean) => void }) => ReactNode);
     showExpandIcon?: boolean;
 }
 
@@ -115,7 +115,7 @@ export default function EthersFunctionCard({cardProps = {}, children, expandClas
             {/* 点击图标切换展开状态 */}
             { showExpandIcon ?
                 <CollapseExpandIcon onClick={handleToggle}
-                                    size="20px"
+                                    size={20}
                                     {...expandIconPosition}
                                     className={expand ? "rotate-180" : ""}
                 /> : null}

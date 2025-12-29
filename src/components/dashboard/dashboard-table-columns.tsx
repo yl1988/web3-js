@@ -23,7 +23,6 @@ export const columns = (options:Props):CyberTableColumn<DashboardSupplyAssetData
                 <div className="flex items-center gap-3">
                     <div
                         className="w-10 h-10 rounded-full border-2 border-cyber-neon-400/50 flex items-center justify-center"
-                        style={{ backgroundColor: `${item.color}20` }}
                     >
                         <img
                             src={item.icon}
@@ -74,7 +73,7 @@ export const columns = (options:Props):CyberTableColumn<DashboardSupplyAssetData
             header: 'SUPPLY APY',
             width: '100px',
             sortable: true,
-            cell: (value:string, item) => {
+            cell: (value, item) => {
                 // const isHighAPY = parseFloat(value) > 5;
                 // const isLowAPY = value.includes('<0.01') || value === '0%';
 
@@ -99,7 +98,7 @@ export const columns = (options:Props):CyberTableColumn<DashboardSupplyAssetData
             header: 'Borrow APY',
             width: '150px',
             sortable: true,
-            cell: (value:string, item) => {
+            cell: (value, item) => {
                 // const isHighAPY = parseFloat(value) > 5;
                 // const isLowAPY = value.includes('<0.01') || value === '0%';
 
@@ -141,8 +140,8 @@ export const columns = (options:Props):CyberTableColumn<DashboardSupplyAssetData
             header: '',
             width: '100px',
             cell: (value) => <div className="flex items-center space-x-2">
-                <AssetsTableButton onClick={onSuplly}>Suplly</AssetsTableButton>
-                <AssetsTableButton onClick={onDetails}>Details</AssetsTableButton>
+                <AssetsTableButton onClick={() => onSuplly(value as string)}>Suplly</AssetsTableButton>
+                <AssetsTableButton onClick={() => onDetails(value as string)}>Details</AssetsTableButton>
             </div>
         }
     ];

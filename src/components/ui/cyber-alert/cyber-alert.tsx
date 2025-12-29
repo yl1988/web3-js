@@ -47,7 +47,7 @@ export function CyberAlert({
     const sizeConfigValues = sizeConfig[size] || sizeConfig.middle
     const { rounded, padding, icon:iconSize, title:titleSize, description:descriptionSize } = sizeConfigValues
 
-    console.log("iconSize========", iconSize)
+    // console.log("iconSize========", iconSize)
     return (
         <div
             className={cn(

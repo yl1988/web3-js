@@ -1,5 +1,5 @@
 // 完整的、生产可用的监听器 - 终极修复版
-import { ethers } from "ethers";
+import {ethers, EventLog, Log} from "ethers";
 import { ERC20_HUMAN_ABI } from "@/src/constants/abis/erc20-human-readable";
 
 export interface TransferEvent {
@@ -109,7 +109,7 @@ export class EnhancedTokenMonitor {
     /**
      * 创建新的单一 provider
      */
-    private createNewSingleProvider(): ethers.JsonRpcProvider {
+    private createNewSingleProvider(): ethers.JsonRpcProvider | ethers.BrowserProvider {
         try {
             // 尝试从各种可能的来源获取 RPC URL
             let rpcUrl = 'http://localhost:8545'; // 默认本地
@@ -154,8 +154,10 @@ export class EnhancedTokenMonitor {
             this.debugLog("开始启动监听器...");
 
             // 1. 检查合约是否支持 Transfer 事件
-            const hasTransferEvent = await this.checkTransferEventSupport();
-            if (!hasTransferEvent) {
+            const iface = this.contract.interface;
+            const hasEvent = iface.hasEvent("Transfer" );
+            console.log("hasEvent=", hasEvent)
+            if (!hasEvent) {
                 throw new Error("该合约不支持 Transfer 事件");
             }
 
@@ -198,10 +200,7 @@ export class EnhancedTokenMonitor {
     private async checkTransferEventSupport(): Promise<boolean> {
         try {
             const iface = this.contract.interface;
-            const hasEvent = iface.fragments.some(
-                (fragment) => fragment.name === "Transfer"
-            );
-
+            const hasEvent = iface.hasEvent("Transfer" );
             if (!hasEvent) {
                 console.error("合约不支持 Transfer 事件");
                 return false;
@@ -262,7 +261,7 @@ export class EnhancedTokenMonitor {
                     // 情况2：直接是 EventLog
                     else if (args[0] && args[0].constructor.name === 'EventLog') {
                         eventLog = args[0];
-                        if (eventLog.args && Array.isArray(eventLog.args)) {
+                        if (eventLog && eventLog.args && Array.isArray(eventLog.args)) {
                             from = eventLog.args[0] as string;
                             to = eventLog.args[1] as string;
                             value = eventLog.args[2] as bigint;
@@ -283,7 +282,7 @@ export class EnhancedTokenMonitor {
                     }
                     console.log("验证参数之后==============")
                     // 确保 value 是 bigint
-                    const safeValue = typeof value === 'bigint' ? value : BigInt(value.toString());
+                    const safeValue = typeof value === 'bigint' ? value : BigInt(value + "");
 
                     // 处理事件
                     await this.handleTransfer(from, to, safeValue, eventLog);
@@ -380,7 +379,7 @@ export class EnhancedTokenMonitor {
     private async queryEventsWithSafeRange(
         fromBlock: number,
         toBlock: number
-    ): Promise<ethers.EventLog[]> {
+    ): Promise<Array<EventLog | Log>> {
         // 双重检查：确保 fromBlock < toBlock
         if (fromBlock >= toBlock) {
             console.warn(`⚠️ 范围无效: fromBlock(${fromBlock}) >= toBlock(${toBlock})`);
@@ -438,29 +437,31 @@ export class EnhancedTokenMonitor {
     /**
      * 处理事件
      */
-    private async processEvents(events: ethers.EventLog[]): Promise<void> {
+    private async processEvents(events: Array<EventLog | Log>): Promise<void> {
         // 限制处理速度
         for (let i = 0; i < events.length; i++) {
             const event = events[i];
+            if( event instanceof EventLog){
+                if (event.args && event.args.length >= 3) {
+                    try {
+                        await this.handleTransfer(
+                            event.args[0],
+                            event.args[1],
+                            event.args[2],
+                            event
+                        );
 
-            if (event.args && event.args.length >= 3) {
-                try {
-                    await this.handleTransfer(
-                        event.args[0],
-                        event.args[1],
-                        event.args[2],
-                        event
-                    );
+                        // 每处理10个事件休息一下
+                        if (i > 0 && i % 10 === 0) {
+                            await new Promise(resolve => setTimeout(resolve, 10));
+                        }
 
-                    // 每处理10个事件休息一下
-                    if (i > 0 && i % 10 === 0) {
-                        await new Promise(resolve => setTimeout(resolve, 10));
+                    } catch (error) {
+                        console.warn("处理历史事件失败:", error);
                     }
-
-                } catch (error) {
-                    console.warn("处理历史事件失败:", error);
                 }
             }
+
         }
     }
 

@@ -3,7 +3,7 @@ import IconArrow from "@/src/components/icons/icon-arrow";
 
 interface Props {
   className?: string
-  size?: string
+  size?: number
   top?: string
   left?: string
   right?: string

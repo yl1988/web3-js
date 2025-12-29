@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 
 export default function PureSVGHalo() {
     const [isClient, setIsClient] = useState(false);
-    const [screenSize, setScreenSize] = useState({ width: 1000, height: 1000 });
+    const [screenSize, setScreenSize] = useState({ width: 1000, height: 1000, maxRadius: 0 });
 
     useEffect(() => {
         setIsClient(true);

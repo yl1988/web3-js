@@ -2,6 +2,7 @@ export interface DashboardSupplyAssetData {
     key: string;
     symbol: string;
     fullName: string;
+    name: string;
     supplyApy: string;
     borrowApy: string;
     walletBalance: number;

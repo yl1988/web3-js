@@ -430,7 +430,7 @@ export default function DEXSwapCard({ ethersVersion }: DEXSwapCardProps) {
                 } else {
                     console.log('已有足够授权额度');
                 }
-            } catch (approveError) {
+            } catch (approveError:any) {
                 console.error('授权过程出错:', approveError);
                 throw new Error(`授权失败: ${approveError.message}`);
             }
@@ -445,7 +445,7 @@ export default function DEXSwapCard({ ethersVersion }: DEXSwapCardProps) {
                 });
                 console.log('✅ 静态调用测试成功');
                 console.log('预期返回:', staticResult);
-            } catch (staticError) {
+            } catch (staticError:any) {
                 console.error('❌ 静态调用测试失败:', staticError);
 
                 // 尝试获取更详细的错误信息

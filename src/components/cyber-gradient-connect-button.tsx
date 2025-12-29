@@ -81,7 +81,7 @@ export default function CyberGradientConnectButton() {
                         />
                         <span className="relative z-10 flex items-center gap-2">
                     {chain.hasIcon && chain.iconUrl && (
-                        <img alt={chain.name} src={chain.iconUrl} className="w-3 md:w-5 h-3 md:h-5" />
+                        <img alt={chain.name || ""} src={chain.iconUrl} className="w-3 md:w-5 h-3 md:h-5" />
                     )}
                           <span className="text-xs md:text-sm">{chain.name}</span>
                   </span>

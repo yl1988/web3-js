@@ -42,7 +42,7 @@ export const config = getDefaultConfig({
   projectId: 'c05ef50f0a865030879bb99e19e9917a',
   chains: isDevelopment
       ? [hardhat, sepolia]
-      : [mainnet, polygon, optimism, arbitrum, base],
+      : [sepolia, mainnet, polygon, optimism, arbitrum, base],
   transports: getTransports(),
   ssr: true,
 });

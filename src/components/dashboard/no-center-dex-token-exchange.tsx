@@ -610,7 +610,7 @@ export default function DEXSwapCard() {
                     <div className="mb-4">
                         <div className="flex justify-between items-center mb-4">
                             <div className="mr-4 flex items-center">
-                                <span className="mr-3 font-medium">SimpleDEX 代币兑换</span>
+                                <span className="mr-3 font-medium">SimpleDEX 代币兑换 （仅支持Hardhat）</span>
                                 <CyberButton
                                     size="small"
                                     variant="secondary"
